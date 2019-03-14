@@ -12,57 +12,59 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 
 public class BaseControl {
 
     private static int nextID = 0;
 	public static SimpleNetworkWrapper netWorkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(Config.MODID);
+	//Tab
+	public static final CreativeTabs fuZhuTab = new FuZhuTab();
 	
-	//TODO Instantiate mod item ---
+	//Block
 	public static Block blockGuhuaNiunaiKuai;
-	
-	//item
+	//Item
 	public static Item itemGuhuaNiunai;
 
+	//ServerSide
 	public static void init(FMLPreInitializationEvent event){
-    	
-		//TODO Instantiate mod item ---
+		//Block
 		blockGuhuaNiunaiKuai = new BlockGuhuaNiunaiKuai();
-		//item
+		//Item
 		itemGuhuaNiunai = new ItemGuhuaNiunai();
 	}
 	
+	//ServerSide
 	public static void register(FMLPreInitializationEvent event){
-		//TODO In this registration items and blocks ---
+		//Block
+		GameRegistry.registerBlock(blockGuhuaNiunaiKuai, blockGuhuaNiunaiKuai.getUnlocalizedName());
+		//Item
+		GameRegistry.registerItem(itemGuhuaNiunai, itemGuhuaNiunai.getUnlocalizedName());
+		//Entity
+//		EntityRegistry.registerModEntity(new ResourceLocation(Config.MODID + ":entitysupersnowman"), EntitySuperSnowman.class, "entitySuperSnowman", 263, ZijingMod.instance,64, 1, true, (204 << 16) + (0 << 8) + 204, (255 << 16) + (102 << 8) + 255);
+		//Message
 //    	netWorkWrapper.registerMessage(ChuansongCardToServerMessage.Handler.class, ChuansongCardToServerMessage.class, nextID++, Side.SERVER);
 //    	netWorkWrapper.registerMessage(ShepherdToClientMessage.Handler.class, ShepherdToClientMessage.class, nextID++, Side.CLIENT);
-    	
-//		ForgeRegistries.BLOCKS.register(blockGuhuaNiunaiKuai);
-//		ForgeRegistries.ITEMS.register(new ItemBlock(blockGuhuaNiunaiKuai).setRegistryName(blockGuhuaNiunaiKuai.getRegistryName()));
-//		GameData.register_impl(blockGuhuaNiunaiKuai);
-//		GameData.register_impl(new ItemBlock(blockGuhuaNiunaiKuai).setRegistryName(blockGuhuaNiunaiKuai.getRegistryName()));
-
-		//item
-//		GameData.register_impl(itemGuhuaNiunai);
-		GameRegistry.registerItem(itemGuhuaNiunai, "LQShi");
-
-		
-//		EntityRegistry.registerModEntity(new ResourceLocation(Config.MODID + ":entitysupersnowman"), EntitySuperSnowman.class, "entitySuperSnowman", 263, ZijingMod.instance,64, 1, true, (204 << 16) + (0 << 8) + 204, (255 << 16) + (102 << 8) + 255);
+		//Event
+		MinecraftForge.EVENT_BUS.register(new ZijingEvent());
 	}
     
+	//ClientSide
     public static void resourceLoad(FMLPreInitializationEvent event){
-    	//TODO Register Rendering ---
+    	//Block
 		bolckResourceLoad(blockGuhuaNiunaiKuai);
-		//item
+		//Item
 		itemResourceLoad(itemGuhuaNiunai);
     }
 	
+	//ServerSide
 	public static void registerRecipe(FMLInitializationEvent event){
 		//TODO Register synthetic methods and burn
 		GameRegistry.addShapelessRecipe(new ItemStack(itemGuhuaNiunai, 1), Items.milk_bucket);
@@ -70,7 +72,6 @@ public class BaseControl {
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.milk_bucket, 1), itemGuhuaNiunai, Items.bucket);
 		addRecipe(new ItemStack(blockGuhuaNiunaiKuai, 1), itemGuhuaNiunai, itemGuhuaNiunai, itemGuhuaNiunai, itemGuhuaNiunai, itemGuhuaNiunai, itemGuhuaNiunai, itemGuhuaNiunai, itemGuhuaNiunai, itemGuhuaNiunai);
 		
-		GameRegistry.addSmelting(Blocks.gravel, new ItemStack(Items.flint, 1), 1);
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.gunpowder, 3), new ItemStack(Items.flint, 1), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.coal, 1));
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.gunpowder, 3), new ItemStack(Items.flint, 1), new ItemStack(Items.dye, 1, 15),new ItemStack(Items.coal, 1, 1));
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.clay_ball, 4), Blocks.clay);
@@ -79,9 +80,11 @@ public class BaseControl {
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.glowstone_dust, 4), Blocks.glowstone);
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.melon, 9), Blocks.melon_block);
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.snowball, 4), Blocks.snow);
-		
+
+		GameRegistry.addSmelting(Blocks.gravel, new ItemStack(Items.flint, 1), 1);
 	}
 	
+	//ClientSide
 	public static void renderLoad(FMLInitializationEvent event){
 //		RenderingRegistry.registerEntityRenderingHandler(EntitySuperSnowman.class, new RenderSuperSnowman(Minecraft.getMinecraft().getRenderManager()));
 	}

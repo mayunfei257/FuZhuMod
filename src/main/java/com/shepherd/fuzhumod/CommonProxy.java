@@ -10,7 +10,6 @@ public class CommonProxy {
 	public void preInit(FMLPreInitializationEvent event){
 		BaseControl.init(event);
 		BaseControl.register(event);
-		MinecraftForge.EVENT_BUS.register(new ZijingEvent());
 	}
 	
 	public void init(FMLInitializationEvent event){

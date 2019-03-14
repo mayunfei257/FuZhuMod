@@ -12,6 +12,7 @@ public class Config {
     public static final String VERSION = "1.0.0";
     public static final String CLIENTSIDE = "com.shepherd.fuzhumod.ClientProxy";
     public static final String SERVERSIDE = "com.shepherd.fuzhumod.CommonProxy";
+    public static final String MODTAB = "fuZhuTab";
 
 	private static Configuration configuration;
 	private static Config config;
