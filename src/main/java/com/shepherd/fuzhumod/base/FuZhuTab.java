@@ -1,4 +1,6 @@
-package com.shepherd.fuzhumod;
+package com.shepherd.fuzhumod.base;
+
+import com.shepherd.fuzhumod.BaseControl;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,6 +16,6 @@ public class FuZhuTab extends CreativeTabs{
 
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return BaseControl.itemGuhuaNiunai;
+		return BaseControl.itemFuzhiCrystal;
 	}
 }

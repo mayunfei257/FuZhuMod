@@ -1,4 +1,4 @@
-package com.shepherd.fuzhumod;
+package com.shepherd.fuzhumod.base;
 
 import java.io.File;
 

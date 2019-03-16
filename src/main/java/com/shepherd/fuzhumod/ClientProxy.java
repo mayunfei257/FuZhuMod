@@ -9,7 +9,6 @@ public class ClientProxy extends CommonProxy{
 	public void preInit(FMLPreInitializationEvent event){
 		super.preInit(event);
 		BaseControl.resourceLoad(event);
-//		ClientRegistry.registerKeyBinding(ZijingEvent.key1);
 	}
 	
 	public void init(FMLInitializationEvent event){

@@ -1,0 +1,11 @@
+﻿#FuzhuMod-----------------------------------------------------------------
+itemGroup.fuZhuTab=FuzhuMod
+#Block----------------------------------------------------------------------
+tile.blockFuzhiCrystal.name=§6FuzhiCrystalBlock
+tile.blockFuzhiTable.name=§6FuzhiTable
+
+#Item----------------------------------------------------------------------
+item.itemFuzhiCrystal.name=§6FuzhiCrystal
+
+#Message----------------------------------------------------------------------
+fuzhumod.itemFuzhiCrystal.message1=§4Copy the material of the item

@@ -1,5 +1,7 @@
 package com.shepherd.fuzhumod;
 
+import com.shepherd.fuzhumod.base.Config;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;

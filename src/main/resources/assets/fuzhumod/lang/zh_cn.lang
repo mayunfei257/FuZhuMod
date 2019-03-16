@@ -1,0 +1,12 @@
+﻿#FuzhuMod-----------------------------------------------------------------
+itemGroup.fuZhuTab=辅助MOD
+#Block----------------------------------------------------------------------
+tile.blockFuzhiCrystal.name=§6复制晶体块
+tile.blockFuzhiTable.name=§6复制台
+tile.blockWanwuCao.name=§6万物草
+
+#Item----------------------------------------------------------------------
+item.itemFuzhiCrystal.name=§6复制晶体
+
+#Message----------------------------------------------------------------------
+fuzhumod.itemFuzhiCrystal.message1=§4复制台复制物品的原料，从万物草烧炼获得

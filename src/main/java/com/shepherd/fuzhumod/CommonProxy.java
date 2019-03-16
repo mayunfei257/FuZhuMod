@@ -14,11 +14,11 @@ public class CommonProxy {
 	
 	public void init(FMLInitializationEvent event){
 		BaseControl.registerRecipe(event);
-//		NetworkRegistry.INSTANCE.registerGuiHandler(ZijingMod.instance, new ZijingGuiHandler());
+		BaseControl.registerGui(event);
 	}
 	
 	public void postinit(FMLPostInitializationEvent event){
-        
+		BaseControl.tileEntityAddMapping(event);
     }
 	
 	public boolean isServerSider() {
