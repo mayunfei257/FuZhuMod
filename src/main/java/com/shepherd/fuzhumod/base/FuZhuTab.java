@@ -16,6 +16,6 @@ public class FuZhuTab extends CreativeTabs{
 
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return BaseControl.itemFuzhiCrystal;
+		return BaseControl.itemHunDunCrystal;
 	}
 }

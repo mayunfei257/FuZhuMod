@@ -17,6 +17,7 @@ public class Config {
 	private static Configuration configuration;
 	private static Config config;
 	
+	private int MAX_COPY_TICK;
 	private int TOOL_HARVEST_LEVEL;
 	private int[] ARMOR_REDUCTION_AMOUNTS;
 	
@@ -24,7 +25,7 @@ public class Config {
 	private ItemArmor.ArmorMaterial zijingArmorMaterial;
 	
 	private Config(FMLPreInitializationEvent e){
-		configuration = new Configuration(new File(e.getModConfigurationDirectory(), "/ziqi/ziqi.cfg"));
+		configuration = new Configuration(new File(e.getModConfigurationDirectory(), "/shepherd/fuzhu.cfg"));
 		configuration.load();
 		load();
 		configuration.save();
@@ -44,12 +45,19 @@ public class Config {
 	}
 	
 	private void load(){
+		this.MAX_COPY_TICK = configuration.get("Base", "MAX_COPY_TICK", 40, "The wait time required to duplicate an item.").getInt();
 		this.TOOL_HARVEST_LEVEL = configuration.get("Tool", "TOOL_HARVEST_LEVEL", 3, "Tools level.").getInt();
 		this.ARMOR_REDUCTION_AMOUNTS = configuration.get("Armor", "ARMOR_REDUCTION_AMOUNTS", new int[]{4, 7, 6, 3}, "Armor defense values, respectively, the head, body, legs, feet.").getIntList();
 		
 	}
 
 
+	public int getMAX_COPY_TICK() {
+		return MAX_COPY_TICK;
+	}
+	public void setMAX_COPY_TICK(int mAX_COPY_TICK) {
+		MAX_COPY_TICK = mAX_COPY_TICK;
+	}
 	public int getTOOL_HARVEST_LEVEL() {
 		return TOOL_HARVEST_LEVEL;
 	}

@@ -1,12 +1,13 @@
 package com.shepherd.fuzhumod.block;
 
+import java.util.List;
 import java.util.Random;
 
 import com.shepherd.fuzhumod.BaseControl;
 import com.shepherd.fuzhumod.FuZhuMod;
 import com.shepherd.fuzhumod.base.Config;
-import com.shepherd.fuzhumod.entity.TileEntityFuzhiTable;
-import com.shepherd.fuzhumod.gui.GuiFuzhiTable;
+import com.shepherd.fuzhumod.entity.TileEntityHunDunTable;
+import com.shepherd.fuzhumod.gui.GuiHunDunTable;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,8 +15,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -23,20 +26,20 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockFuzhiTable  extends BlockContainer{
+public class BlockHunDunTable  extends BlockContainer{
     private final boolean working;
     private final Random random = new Random();
 	IIcon gor = null, dol = null, st1 = null, st2 = null, st3 = null, st4 = null;
 	
-	public BlockFuzhiTable() {
+	public BlockHunDunTable() {
 		super(Material.anvil);
 		working = false;
         setHardness(10f);
         setResistance(100.0f);
         setHarvestLevel("pickaxe", 0);
         setStepSound(Block.soundTypeMetal);
-        setBlockName("blockFuzhiTable");
-        setBlockTextureName(Config.MODID + ":blockfuzhitable");
+        setBlockName("blockHunDunTable");
+        setBlockTextureName(Config.MODID + ":blockhunduntable");
 		setCreativeTab(BaseControl.fuZhuTab);
 	}
 
@@ -56,7 +59,7 @@ public class BlockFuzhiTable  extends BlockContainer{
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		this.gor = reg.registerIcon(this.getTextureName());
-		this.dol = reg.registerIcon(Config.MODID + ":blockfuzhitable_up");
+		this.dol = reg.registerIcon(Config.MODID + ":blockhunduntable_up");
 		this.st1 = reg.registerIcon(this.getTextureName());
 		this.st2 = reg.registerIcon(this.getTextureName());
 		this.st3 = reg.registerIcon(this.getTextureName());
@@ -65,16 +68,16 @@ public class BlockFuzhiTable  extends BlockContainer{
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int p_149915_2_) {
-		return new TileEntityFuzhiTable();
+		return new TileEntityHunDunTable();
 	}
 	
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_, float p_149727_7_, float p_149727_8_, float p_149727_9_){
         if (world.isRemote){
             return true;
         } else{
-        	TileEntityFuzhiTable tileEntityFuzhiTable = (TileEntityFuzhiTable)world.getTileEntity(x, y, z);
+        	TileEntityHunDunTable tileEntityFuzhiTable = (TileEntityHunDunTable)world.getTileEntity(x, y, z);
             if (tileEntityFuzhiTable != null){
-				player.openGui(FuZhuMod.instance, GuiFuzhiTable.GUIID, world, x, y, z);
+				player.openGui(FuZhuMod.instance, GuiHunDunTable.GUIID, world, x, y, z);
             }
             return true;
         }
@@ -93,7 +96,7 @@ public class BlockFuzhiTable  extends BlockContainer{
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block bolck, int metadata){
-		TileEntityFuzhiTable tileEntityFuzhiTable = (TileEntityFuzhiTable)world.getTileEntity(x, y, z);
+		TileEntityHunDunTable tileEntityFuzhiTable = (TileEntityHunDunTable)world.getTileEntity(x, y, z);
 		if (tileEntityFuzhiTable != null){
 			for (int i1 = 0; i1 < tileEntityFuzhiTable.getSizeInventory(); ++i1){
 				ItemStack itemstack = tileEntityFuzhiTable.getStackInSlot(i1);
@@ -122,5 +125,22 @@ public class BlockFuzhiTable  extends BlockContainer{
 			world.func_147453_f(x, y, z, bolck);
 		}
 		super.breakBlock(world, x, y, z, bolck, metadata);
+	}
+	
+	//ItemBlock
+	public static class ItemBlockHunDunTable extends ItemBlock{
+
+		public ItemBlockHunDunTable(Block blockHunDunTable) {
+			super(blockHunDunTable);
+		}
+
+		@Override
+		@SideOnly(Side.CLIENT)
+		public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
+			list.add("");
+			list.add(I18n.format(Config.MODID + ".blockHunDunTable.message1", new Object[]{}));
+			list.add(I18n.format(Config.MODID + ".blockHunDunTable.message2", new Object[]{}));
+			list.add("");
+		}
 	}
 }

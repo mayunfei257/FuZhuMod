@@ -12,13 +12,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemFuZhiCrystal extends ItemCrystal{
+public class ItemShengMingCrystal extends ItemCrystal{
 
-	public ItemFuZhiCrystal() {
+	public ItemShengMingCrystal() {
 		super();
 		setMaxStackSize(64);
-		setUnlocalizedName("itemFuZhiCrystal");
-		setTextureName(Config.MODID + ":itemfuzhicrystal");
+		setUnlocalizedName("itemShengMingCrystal");
+		setTextureName(Config.MODID + ":itemshengmingcrystal");
 		setCreativeTab(BaseControl.fuZhuTab);
 	}
 	
@@ -27,8 +27,8 @@ public class ItemFuZhiCrystal extends ItemCrystal{
     @SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
 		list.add("");
-		list.add(I18n.format(Config.MODID + ".itemFuZhiCrystal.message1", new Object[]{}));
-		list.add(I18n.format(Config.MODID + ".itemFuZhiCrystal.message2", new Object[]{}));
+		list.add(I18n.format(Config.MODID + ".itemShengMingCrystal.message1", new Object[]{}));
+		list.add(I18n.format(Config.MODID + ".itemShengMingCrystal.message2", new Object[]{}));
 		list.add("");
 	}
 }

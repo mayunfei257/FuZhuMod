@@ -1,12 +1,39 @@
 ﻿#FuzhuMod-----------------------------------------------------------------
 itemGroup.fuZhuTab=辅助MOD
+
 #Block----------------------------------------------------------------------
-tile.blockFuzhiCrystal.name=§6复制晶体块
-tile.blockFuzhiTable.name=§6复制台
-tile.blockWanwuCao.name=§6万物草
+tile.blockHunDunCrystal.name=§6混沌石块
+tile.blockHunDunTable.name=§6混沌台
+tile.blockHunDunCao.name=§6混沌草
 
 #Item----------------------------------------------------------------------
-item.itemFuzhiCrystal.name=§6复制晶体
+item.itemHunDunCrystal.name=§6混沌石
+item.itemHuiMieCrystal.name=§6毁灭晶石
+item.itemShengMingCrystal.name=§6生命晶石
+item.itemFuZhiCrystal.name=§6复制晶石
+
+#BlockInfor----------------------------------------------------------------
+fuzhumod.blockHunDunCrystal.message1=§5万物之初，世界之始
+fuzhumod.blockHunDunCrystal.message2=§7由混沌石合成的大混沌石块
+fuzhumod.blockHunDunTable.message1=§7可以承受极大能量的混沌台，可用于
+fuzhumod.blockHunDunTable.message2=§7分解混沌石，强化物品，复制物品等
+fuzhumod.blockHunDunCao.message1=§7集天地之造化的神奇灵草，可提炼出混沌石
+
+#ItemInfor-----------------------------------------------------------------
+fuzhumod.itemHunDunCrystal.message1=§5万物之初，世界之始
+fuzhumod.itemHunDunCrystal.message2=§7可从混沌草烧炼获得
+fuzhumod.itemHuiMieCrystal.message1=§5力量之源，灾难之根
+fuzhumod.itemHuiMieCrystal.message2=§7可在混沌台分解混沌石而获得
+fuzhumod.itemShengMingCrystal.message1=§5生命之源，新生之本
+fuzhumod.itemShengMingCrystal.message2=§7可在混沌台分解混沌石而获得
+fuzhumod.itemFuZhiCrystal.message1=§5容天纳地，幻化万千
+fuzhumod.itemFuZhiCrystal.message2=§7可在混沌台分解混沌石而获得
 
 #Message----------------------------------------------------------------------
-fuzhumod.itemFuzhiCrystal.message1=§4复制台复制物品的原料，从万物草烧炼获得
+fuzhumod.guiHunDunTable.button=§6执行
+fuzhumod.guiHunDunTable.error1=§c错误：玩家维度和交互实体不在同一维度，实体维度=%d，玩家维度=%d
+fuzhumod.guiHunDunTable.error2=§c错误：交互实体类型错误，交互实体=%s
+fuzhumod.guiHunDunTable.error3=§c交互实体 %s
+
+fuzhumod.clientToServerMessage.error1=§c错误：没有该类型的消息数据，messageType=%s
+
