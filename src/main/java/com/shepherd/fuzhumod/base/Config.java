@@ -14,6 +14,14 @@ public class Config {
     public static final String SERVERSIDE = "com.shepherd.fuzhumod.CommonProxy";
     public static final String MODTAB = "fuZhuTab";
 
+    public static final String NBTTAG_TYPE = MODID + ":Type";
+    public static final String NBTTAG_LEVEL = MODID + ":Level";
+    public static final String NBTTAG_STRENGTH = MODID + ":Strength";
+    
+    public static final String NBTTAG_TYPE_ATTACK = "attack";
+    public static final String NBTTAG_TYPE_DEFENSE = "defense";
+    
+
 	private static Configuration configuration;
 	private static Config config;
 	

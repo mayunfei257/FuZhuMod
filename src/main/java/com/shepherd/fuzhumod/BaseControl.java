@@ -42,6 +42,7 @@ public class BaseControl {
 	public static Block blockHunDunCrystal;
 	public static Block blockHunDunTable;
 	public static Block blockHunDunCao;
+	//FakePlayer
 	//Item
 	public static Item itemHunDunCrystal;
 	public static Item itemHuiMieCrystal;

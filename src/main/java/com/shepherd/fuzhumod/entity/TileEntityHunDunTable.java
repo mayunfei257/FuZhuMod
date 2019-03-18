@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -196,7 +197,7 @@ public class TileEntityHunDunTable  extends TileEntity implements ISidedInventor
 			}else {//Crystal
 				if(emptyStackNumOfOutputStack() <= 0) return;
 				
-				if(!isItemStackEmpty(itemCrystal) && itemCrystal.getItem() == BaseControl.itemFuZhiCrystal) {
+				if(!isItemStackEmpty(itemCrystal) && itemCrystal.getItem() == BaseControl.itemFuZhiCrystal) {//FuZhi
 					ItemStack sourceItemStack = null;
 					for(int index = 1; index < 10; index++) {//The first one
 						if(!isItemStackEmpty(hunDunTableItemStacks[index])) {
@@ -208,6 +209,66 @@ public class TileEntityHunDunTable  extends TileEntity implements ISidedInventor
 						int index = getTheEmptyIndexOfOutputStack();
 						if(isItemStackEmpty(hunDunTableItemStacks[index])) {
 							hunDunTableItemStacks[index] = sourceItemStack.copy();
+							hunDunTableItemStacks[0].stackSize -= 1;
+							world.playSoundEffect(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, "block.end_portal.spawn", 1.0F, 1.0F);
+						}
+					}
+					
+				}else if(!isItemStackEmpty(itemCrystal) && itemCrystal.getItem() == BaseControl.itemHuiMieCrystal) {//HuiMie
+					ItemStack sourceItemStack = null;
+					for(int index = 1; index < 10; index++) {//The first tool
+						ItemStack itemStack = hunDunTableItemStacks[index];
+						if(!isItemStackEmpty(itemStack) && !(itemStack.getItem() instanceof ItemArmor) && itemStack.getMaxStackSize() == 1) {
+							sourceItemStack = itemStack;
+							break;
+						}
+					}
+					if(null != sourceItemStack) {
+						int index = getTheEmptyIndexOfOutputStack();
+						if(isItemStackEmpty(hunDunTableItemStacks[index])) {
+							NBTTagCompound stackTagCompound = sourceItemStack.getTagCompound();
+							if(null == stackTagCompound){
+								stackTagCompound = new NBTTagCompound();
+								stackTagCompound.setString(Config.NBTTAG_TYPE, Config.NBTTAG_TYPE_ATTACK);
+								stackTagCompound.setInteger(Config.NBTTAG_LEVEL, 0);
+								stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, 0F);
+								sourceItemStack.setTagCompound(stackTagCompound);
+							}
+							stackTagCompound.setString(Config.NBTTAG_TYPE, Config.NBTTAG_TYPE_ATTACK);
+							stackTagCompound.setInteger(Config.NBTTAG_LEVEL, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1);
+							stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, stackTagCompound.getFloat(Config.NBTTAG_STRENGTH) + 1.0F);
+							hunDunTableItemStacks[index] = sourceItemStack.copy();
+							sourceItemStack.stackSize = 0;
+							hunDunTableItemStacks[0].stackSize -= 1;
+							world.playSoundEffect(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, "block.end_portal.spawn", 1.0F, 1.0F);
+						}
+					}
+					
+				}else if(!isItemStackEmpty(itemCrystal) && itemCrystal.getItem() == BaseControl.itemShengMingCrystal) {//ShengMing
+					ItemStack sourceItemStack = null;
+					for(int index = 1; index < 10; index++) {//The first armor
+						ItemStack itemStack = hunDunTableItemStacks[index];
+						if(!isItemStackEmpty(itemStack) && itemStack.getItem() instanceof ItemArmor) {
+							sourceItemStack = itemStack;
+							break;
+						}
+					}
+					if(null != sourceItemStack) {
+						int index = getTheEmptyIndexOfOutputStack();
+						if(isItemStackEmpty(hunDunTableItemStacks[index])) {
+							NBTTagCompound stackTagCompound = sourceItemStack.getTagCompound();
+							if(null == stackTagCompound){
+								stackTagCompound = new NBTTagCompound();
+								stackTagCompound.setString(Config.NBTTAG_TYPE, Config.NBTTAG_TYPE_DEFENSE);
+								stackTagCompound.setInteger(Config.NBTTAG_LEVEL, 0);
+								stackTagCompound.setDouble(Config.NBTTAG_STRENGTH, 0);
+								sourceItemStack.setTagCompound(stackTagCompound);
+							}
+							stackTagCompound.setString(Config.NBTTAG_TYPE, Config.NBTTAG_TYPE_DEFENSE);
+							stackTagCompound.setInteger(Config.NBTTAG_LEVEL, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1);
+							stackTagCompound.setDouble(Config.NBTTAG_STRENGTH, stackTagCompound.getDouble(Config.NBTTAG_STRENGTH) + 1.0D);
+							hunDunTableItemStacks[index] = sourceItemStack.copy();
+							sourceItemStack.stackSize = 0;
 							hunDunTableItemStacks[0].stackSize -= 1;
 							world.playSoundEffect(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, "block.end_portal.spawn", 1.0F, 1.0F);
 						}

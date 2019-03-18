@@ -112,7 +112,6 @@ public class BlockHunDunCao extends BlockReed {
 		@Override
 		@SideOnly(Side.CLIENT)
 		public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
-			list.add("");
 			list.add(I18n.format(Config.MODID + ".blockHunDunCao.message1", new Object[]{}));
 			list.add("");
 		}

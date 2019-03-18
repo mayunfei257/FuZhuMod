@@ -173,13 +173,11 @@ public class GuiHunDunTable {
 		@Override
 		public void initGui() {
 			super.initGui();
-			this.guiLeft = (this.width - 176) / 2;
-			this.guiTop = (this.height - 166) / 2;
 			Keyboard.enableRepeatEvents(true);
 			this.buttonList.clear();
-			int posX = (this.width) / 2;
-			int posY = (this.height) / 2;
-			this.buttonList.add(new GuiButton(0, this.guiLeft + 72, this.guiTop + 40, 32, 20, I18n.format(Config.MODID + ".guiHunDunTable.button", new Object[]{})));
+			
+			GuiButton button = new GuiButton(0, this.guiLeft + 72, this.guiTop + 40, 32, 20, I18n.format(Config.MODID + ".guiHunDunTable.button.type1", new Object[]{}));
+			this.buttonList.add(button);
 //			this.buttonList.add(new GuiButton(0, this.guiLeft + 65, this.guiTop + 55, 35, 20, I18n.format(Config.MODID + ".guiHunDunTable.button", new Object[]{})));
 
 		}
@@ -196,6 +194,11 @@ public class GuiHunDunTable {
 				nbtTag.setInteger("Z", this.z);
 				BaseControl.netWorkWrapper.sendToServer(new ClientToServerMessage(this.player.getUniqueID(), GuiHunDunTable.GUINAME, nbtTag));
 			}
+		}
+
+		@Override
+		public void updateScreen(){
+			super.updateScreen();
 		}
 	}
 	
