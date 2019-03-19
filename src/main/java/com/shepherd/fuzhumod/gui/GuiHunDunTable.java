@@ -176,7 +176,7 @@ public class GuiHunDunTable {
 			this.buttonList.clear();
 			ItemStack itemCrystal = ((MyContainer)this.inventorySlots).getCrystalItemStack();
 			
-			String buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type1", new Object[]{});
+			String buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type0", new Object[]{});
 			if(null != itemCrystal && itemCrystal.stackSize > 0) {
 				if(itemCrystal.getItem() == BaseControl.itemHunDunCrystal)
 					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type1", new Object[]{});

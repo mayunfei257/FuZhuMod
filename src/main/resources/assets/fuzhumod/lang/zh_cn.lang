@@ -52,9 +52,11 @@ fuzhumod.tileEntityHunDunTable.shengMingCrystal4=§c没有可强化防具！
 #Message----------------------------------------------------------------------
 fuzhumod.clientToServerMessage.error1=§c错误：没有该类型的消息数据，messageType = %s！
 
+fuzhumod.guiHunDunTable.button.type0=§6工作台
 fuzhumod.guiHunDunTable.button.type1=§6分解
 fuzhumod.guiHunDunTable.button.type2=§6复制
 fuzhumod.guiHunDunTable.button.type3=§6强化
+fuzhumod.guiHunDunTable.button.type4=§6打包
 fuzhumod.guiHunDunTable.error1=§c错误：玩家维度和交互实体不在同一维度，实体维度 = %d，玩家维度 = %d！
 fuzhumod.guiHunDunTable.error2=§c错误：交互实体类型错误，交互实体 = %s！
 
