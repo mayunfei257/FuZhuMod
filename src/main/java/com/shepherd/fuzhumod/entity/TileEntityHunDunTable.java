@@ -2,9 +2,9 @@ package com.shepherd.fuzhumod.entity;
 
 import com.shepherd.fuzhumod.BaseControl;
 import com.shepherd.fuzhumod.base.Config;
+import com.shepherd.fuzhumod.type.CrystalBlockType;
+import com.shepherd.fuzhumod.type.CrystalItemType;
 
-import net.minecraft.block.BlockFurnace;
-import net.minecraft.client.audio.SoundCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.sound.SoundEvent;
 
 public class TileEntityHunDunTable  extends TileEntity implements ISidedInventory{
 	/** 0 = Crystal  */
@@ -176,10 +174,10 @@ public class TileEntityHunDunTable  extends TileEntity implements ISidedInventor
 						world.playSoundEffect(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, "block.end_portal.spawn", 1.0F, 1.0F);
 				}else if(itemCrystal.getItem() == BaseControl.itemHuiMieCrystal) {
 					if(executeHuiMieCrystal(player))
-						world.playSoundEffect(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, "block.end_portal.spawn", 1.0F, 1.0F);
+						world.playSoundEffect(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, "random.anvil_land", 1.0F, 1.0F);
 				}else if(itemCrystal.getItem() == BaseControl.itemShengMingCrystal) {
 					if(executeShengMingCrystal(player))
-						world.playSoundEffect(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, "block.end_portal.spawn", 1.0F, 1.0F);
+						world.playSoundEffect(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D, "random.anvil_land", 1.0F, 1.0F);
 				}
 				//Set Empty
 				for(int index = 0; index < hunDunTableItemStacks.length; index++) {
@@ -229,6 +227,10 @@ public class TileEntityHunDunTable  extends TileEntity implements ISidedInventor
 			}
 		}
 		if(null != sourceItemStack){
+			if(sourceItemStack.getItem() instanceof CrystalItemType || sourceItemStack.getItem() instanceof CrystalBlockType) {
+				player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".tileEntityHunDunTable.fuZhiCrystal4", new Object[] {})));
+				return false;
+			}
 			int index = getTheEmptyIndexOfOutputStack();
 			if(isItemStackEmpty(hunDunTableItemStacks[index])) {
 				hunDunTableItemStacks[index] = sourceItemStack.copy();

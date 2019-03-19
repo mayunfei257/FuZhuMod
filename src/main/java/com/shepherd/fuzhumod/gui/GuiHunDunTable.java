@@ -57,9 +57,9 @@ public class GuiHunDunTable {
 			for(int i = 0; i < 3; i++) {//Input
 				for(int j = 0; j < 3; j++) {
 					this.addSlotToContainer(new Slot(entityInventory, i * 3 + j + 1, 8 + j * 18, 8 + i * 18) {
-						public boolean isItemValid(ItemStack stack) {
-							return stack != null && !(stack.getItem() instanceof CrystalItemType) && !(stack.getItem() instanceof CrystalBlockType);
-						}
+//						public boolean isItemValid(ItemStack stack) {
+//							return stack != null && !(stack.getItem() instanceof CrystalItemType) && !(stack.getItem() instanceof CrystalBlockType);
+//						}
 					});
 				}
 			}
