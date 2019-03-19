@@ -139,6 +139,7 @@ public class GuiHunDunTable {
 		private int x;
 		private int y;
 		private int z;
+		private GuiButton guiButton;
 
 		public MyGuiContainer(World world, int i, int j, int k, EntityPlayer player) {
 			super(new MyContainer(world, i, j, k, player));
@@ -174,21 +175,9 @@ public class GuiHunDunTable {
 			super.initGui();
 			Keyboard.enableRepeatEvents(true);
 			this.buttonList.clear();
-			ItemStack itemCrystal = ((MyContainer)this.inventorySlots).getCrystalItemStack();
-			
-			String buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type0", new Object[]{});
-			if(null != itemCrystal && itemCrystal.stackSize > 0) {
-				if(itemCrystal.getItem() == BaseControl.itemHunDunCrystal)
-					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type1", new Object[]{});
-				else if(itemCrystal.getItem() == BaseControl.itemFuZhiCrystal) 
-					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type2", new Object[]{});
-				else if(itemCrystal.getItem() == BaseControl.itemHuiMieCrystal || itemCrystal.getItem() == BaseControl.itemShengMingCrystal) 
-					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type3", new Object[]{});
-			}
-			
-			this.buttonList.add(new GuiButton(0, this.guiLeft + 72, this.guiTop + 40, 32, 20, buttonName));
+			guiButton = new GuiButton(0, this.guiLeft + 72, this.guiTop + 40, 32, 20, I18n.format(Config.MODID + ".guiHunDunTable.button.type0", new Object[]{}));
+			this.buttonList.add(guiButton);
 //			this.buttonList.add(new GuiButton(0, this.guiLeft + 65, this.guiTop + 55, 35, 20, I18n.format(Config.MODID + ".guiHunDunTable.button", new Object[]{})));
-
 		}
 		
 		@Override
@@ -208,6 +197,21 @@ public class GuiHunDunTable {
 		@Override
 		public void updateScreen(){
 			super.updateScreen();
+		}
+
+		@Override
+		protected void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+			ItemStack itemCrystal = ((MyContainer)this.inventorySlots).getCrystalItemStack();
+			String buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type0", new Object[]{});
+			if(null != itemCrystal && itemCrystal.stackSize > 0) {
+				if(itemCrystal.getItem() == BaseControl.itemHunDunCrystal)
+					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type1", new Object[]{});
+				else if(itemCrystal.getItem() == BaseControl.itemFuZhiCrystal) 
+					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type2", new Object[]{});
+				else if(itemCrystal.getItem() == BaseControl.itemHuiMieCrystal || itemCrystal.getItem() == BaseControl.itemShengMingCrystal) 
+					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type3", new Object[]{});
+			}
+			guiButton.displayString = buttonName;
 		}
 	}
 	

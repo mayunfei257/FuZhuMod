@@ -1,13 +1,13 @@
 package com.shepherd.fuzhumod;
 
 import com.shepherd.fuzhumod.base.Config;
-import com.shepherd.fuzhumod.base.FuZhuTab;
 import com.shepherd.fuzhumod.base.FuZhuEvent;
-import com.shepherd.fuzhumod.base.ZijingGuiHandler;
-import com.shepherd.fuzhumod.block.BlockHunDunTable;
-import com.shepherd.fuzhumod.block.BlockHunDunCrystal;
+import com.shepherd.fuzhumod.base.FuZhuTab;
+import com.shepherd.fuzhumod.base.FuZhuWorldGenerator;
+import com.shepherd.fuzhumod.base.FuZhuGuiHandler;
 import com.shepherd.fuzhumod.block.BlockHunDunCao;
-import com.shepherd.fuzhumod.block.BlockHunDunCrystal.ItemBlockHunDunCrystal;
+import com.shepherd.fuzhumod.block.BlockHunDunCrystal;
+import com.shepherd.fuzhumod.block.BlockHunDunTable;
 import com.shepherd.fuzhumod.entity.TileEntityHunDunTable;
 import com.shepherd.fuzhumod.item.ItemFuZhiCrystal;
 import com.shepherd.fuzhumod.item.ItemHuiMieCrystal;
@@ -25,7 +25,6 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -116,7 +115,8 @@ public class BaseControl {
 
 	//ServerSide
 	public static void registerGui(FMLInitializationEvent event) {
-		NetworkRegistry.INSTANCE.registerGuiHandler(FuZhuMod.instance, new ZijingGuiHandler());
+		GameRegistry.registerWorldGenerator(new FuZhuWorldGenerator(), 1);
+		NetworkRegistry.INSTANCE.registerGuiHandler(FuZhuMod.instance, new FuZhuGuiHandler());
 	}
 	
 	//ClientSide

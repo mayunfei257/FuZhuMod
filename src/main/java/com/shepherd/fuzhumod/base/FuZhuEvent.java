@@ -86,9 +86,7 @@ public class FuZhuEvent {
 				String type = stackTagCompound.getString(Config.NBTTAG_TYPE);
 				float strength = stackTagCompound.getFloat(Config.NBTTAG_STRENGTH);
 				if(Config.NBTTAG_TYPE_ATTACK.equals(type)) {
-					System.out.println("LivingHurtEvent.ammount1 = " + event.ammount);//
 					event.ammount += strength;
-					System.out.println("LivingHurtEvent.ammount2 = " + event.ammount);//
 				}
 			}
 		}
@@ -108,9 +106,7 @@ public class FuZhuEvent {
 			}
 			if(totalStrength > 0) {
 				float reduce = Math.min(totalStrength, event.ammount);
-				System.out.println("LivingHurtEvent.ammount3 = " + event.ammount);//
 				event.ammount = event.ammount - reduce;
-				System.out.println("LivingHurtEvent.ammount4 = " + event.ammount);//
 				player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".livingHurtEvent.ammount", new Object[] {new DecimalFormat("#0.0").format(reduce)})));
 			}
 		}
