@@ -2,7 +2,7 @@ package com.shepherd.fuzhumod;
 
 import com.shepherd.fuzhumod.base.Config;
 import com.shepherd.fuzhumod.base.FuZhuTab;
-import com.shepherd.fuzhumod.base.ZijingEvent;
+import com.shepherd.fuzhumod.base.FuZhuEvent;
 import com.shepherd.fuzhumod.base.ZijingGuiHandler;
 import com.shepherd.fuzhumod.block.BlockHunDunTable;
 import com.shepherd.fuzhumod.block.BlockHunDunCrystal;
@@ -79,7 +79,7 @@ public class BaseControl {
     	netWorkWrapper.registerMessage(ClientToServerMessage.Handler.class, ClientToServerMessage.class, nextID++, Side.SERVER);
 //    	netWorkWrapper.registerMessage(ShepherdToClientMessage.Handler.class, ShepherdToClientMessage.class, nextID++, Side.CLIENT);
 		//Event
-		MinecraftForge.EVENT_BUS.register(new ZijingEvent());
+		MinecraftForge.EVENT_BUS.register(new FuZhuEvent());
 	}
     
 	//ClientSide

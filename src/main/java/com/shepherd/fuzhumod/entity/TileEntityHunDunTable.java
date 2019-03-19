@@ -184,6 +184,8 @@ public class TileEntityHunDunTable  extends TileEntity implements ISidedInventor
 					if(isItemStackEmpty(hunDunTableItemStacks[index]))
 						hunDunTableItemStacks[index] = null;
 				}
+			}else {
+//				ContainerWorkbench
 			}
 		}
 	}
@@ -266,17 +268,18 @@ public class TileEntityHunDunTable  extends TileEntity implements ISidedInventor
 					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, 0F);
 					sourceItemStack.setTagCompound(stackTagCompound);
 				}
-				if(hunDunTableItemStacks[0].stackSize >= stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1) {
+				int quantity = (int) ((stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1) * Config.NBTTAG_TYPE_ATTACK_CK + Config.NBTTAG_TYPE_ATTACK_CB);
+				if(hunDunTableItemStacks[0].stackSize >= quantity) {
 					stackTagCompound.setString(Config.NBTTAG_TYPE, Config.NBTTAG_TYPE_ATTACK);
 					stackTagCompound.setInteger(Config.NBTTAG_LEVEL, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1);
 					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) * Config.NBTTAG_TYPE_ATTACK_K);
 					hunDunTableItemStacks[index] = sourceItemStack.copy();
 					sourceItemStack.stackSize = 0;
-					hunDunTableItemStacks[0].stackSize -= stackTagCompound.getInteger(Config.NBTTAG_LEVEL);
+					hunDunTableItemStacks[0].stackSize -= quantity;
 					player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".tileEntityHunDunTable.huiMieCrystal1", new Object[] {stackTagCompound.getInteger(Config.NBTTAG_LEVEL)})));
 					return true;
 				}else {
-					player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".tileEntityHunDunTable.huiMieCrystal2", new Object[] {stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1})));
+					player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".tileEntityHunDunTable.huiMieCrystal2", new Object[] {quantity})));
 				}
 			}else {
 				player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".tileEntityHunDunTable.huiMieCrystal3", new Object[] {})));
@@ -306,17 +309,18 @@ public class TileEntityHunDunTable  extends TileEntity implements ISidedInventor
 					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, 0F);
 					sourceItemStack.setTagCompound(stackTagCompound);
 				}
-				if(hunDunTableItemStacks[0].stackSize >= stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1) {
+				int quantity = (int) ((stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1) * Config.NBTTAG_TYPE_DEFENSE_CK + Config.NBTTAG_TYPE_DEFENSE_CB);
+				if(hunDunTableItemStacks[0].stackSize >= quantity) {
 					stackTagCompound.setString(Config.NBTTAG_TYPE, Config.NBTTAG_TYPE_DEFENSE);
 					stackTagCompound.setInteger(Config.NBTTAG_LEVEL, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1);
 					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) * Config.NBTTAG_TYPE_DEFENSE_K);
 					hunDunTableItemStacks[index] = sourceItemStack.copy();
 					sourceItemStack.stackSize = 0;
-					hunDunTableItemStacks[0].stackSize -= stackTagCompound.getInteger(Config.NBTTAG_LEVEL);
+					hunDunTableItemStacks[0].stackSize -= quantity;
 					player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".tileEntityHunDunTable.shengMingCrystal1", new Object[] {stackTagCompound.getInteger(Config.NBTTAG_LEVEL)})));
 					return true;
 				}else {
-					player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".tileEntityHunDunTable.shengMingCrystal2", new Object[] {stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1})));
+					player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".tileEntityHunDunTable.shengMingCrystal2", new Object[] {quantity})));
 				}
 			}else {
 				player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".tileEntityHunDunTable.shengMingCrystal3", new Object[] {})));

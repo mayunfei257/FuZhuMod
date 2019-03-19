@@ -33,7 +33,7 @@ fuzhumod.tooltipEvent.attack1=§5强化等级: %d级
 fuzhumod.tooltipEvent.attack2=§5伤害增加: +%s
 fuzhumod.tooltipEvent.defense1=§5强化等级: %d级
 fuzhumod.tooltipEvent.defense2=§5伤害减免: -%s
-fuzhumod.livingHurtEvent.ammount=§b防具强化伤害减免: -%s！
+fuzhumod.livingHurtEvent.ammount=§b伤害减免: -%s！
 
 fuzhumod.tileEntityHunDunTable.hunDunCrystal1=§c输出栏位不足！
 fuzhumod.tileEntityHunDunTable.fuZhiCrystal1=§b复制成功！
