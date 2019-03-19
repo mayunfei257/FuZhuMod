@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.shepherd.fuzhumod.BaseControl;
 import com.shepherd.fuzhumod.base.Config;
+import com.shepherd.fuzhumod.type.CrystalBlockType;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,7 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockHunDunCao extends BlockReed {
+public class BlockHunDunCao extends BlockReed implements CrystalBlockType{
 	private static final int MaxHigh = 3;
 	IIcon la;
 

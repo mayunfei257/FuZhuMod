@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.shepherd.fuzhumod.BaseControl;
 import com.shepherd.fuzhumod.base.Config;
+import com.shepherd.fuzhumod.type.CrystalBlockType;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,7 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class BlockHunDunCrystal extends Block{
+public class BlockHunDunCrystal extends Block implements CrystalBlockType{
 
 	public BlockHunDunCrystal() {
 		super(Material.iron);

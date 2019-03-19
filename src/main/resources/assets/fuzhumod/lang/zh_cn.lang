@@ -29,16 +29,31 @@ fuzhumod.itemShengMingCrystal.message2=§7可在混沌台分解混沌石而获�
 fuzhumod.itemFuZhiCrystal.message1=§5容天纳地，幻化万千
 fuzhumod.itemFuZhiCrystal.message2=§7可在混沌台分解混沌石而获得
 
-fuzhumod.tooltipEvent.attack=§5强化等级:%d级 伤害增加：+%s
-fuzhumod.tooltipEvent.defense=§5强化等级:%d级 伤害减免：-%s
+fuzhumod.tooltipEvent.attack1=§5强化等级: %d级
+fuzhumod.tooltipEvent.attack2=§5伤害增加: +%s
+fuzhumod.tooltipEvent.defense1=§5强化等级: %d级
+fuzhumod.tooltipEvent.defense2=§5伤害减免: -%s
+fuzhumod.livingHurtEvent.ammount=§b防具强化伤害减免: -%s！
+
+fuzhumod.tileEntityHunDunTable.hunDunCrystal1=§c输出栏位不足！
+fuzhumod.tileEntityHunDunTable.fuZhiCrystal1=§b复制成功！
+fuzhumod.tileEntityHunDunTable.fuZhiCrystal2=§c输出栏位已满！
+fuzhumod.tileEntityHunDunTable.fuZhiCrystal3=§c没有可复制物品！
+fuzhumod.tileEntityHunDunTable.huiMieCrystal1=§b武器强化成功，强化 +%d！
+fuzhumod.tileEntityHunDunTable.huiMieCrystal2=§b毁灭晶石不足，需要%d个！
+fuzhumod.tileEntityHunDunTable.huiMieCrystal3=§c输出栏位已满！
+fuzhumod.tileEntityHunDunTable.huiMieCrystal4=§b没有可强化武器！
+fuzhumod.tileEntityHunDunTable.shengMingCrystal1=§b防具强化成功，强化 +%d！
+fuzhumod.tileEntityHunDunTable.shengMingCrystal2=§c生命晶石不足，需要%d个！
+fuzhumod.tileEntityHunDunTable.shengMingCrystal3=§c输出栏位已满！
+fuzhumod.tileEntityHunDunTable.shengMingCrystal4=§c没有可强化防具！
 
 #Message----------------------------------------------------------------------
-fuzhumod.clientToServerMessage.error1=§c错误：没有该类型的消息数据，messageType=%s
+fuzhumod.clientToServerMessage.error1=§c错误：没有该类型的消息数据，messageType = %s！
 
 fuzhumod.guiHunDunTable.button.type1=§6分解
-fuzhumod.guiHunDunTable.button.type2=§6强化
-fuzhumod.guiHunDunTable.button.type3=§6复制
-fuzhumod.guiHunDunTable.error1=§c错误：玩家维度和交互实体不在同一维度，实体维度=%d，玩家维度=%d
-fuzhumod.guiHunDunTable.error2=§c错误：交互实体类型错误，交互实体=%s
-fuzhumod.guiHunDunTable.error3=§c交互实体 %s
+fuzhumod.guiHunDunTable.button.type2=§6复制
+fuzhumod.guiHunDunTable.button.type3=§6强化
+fuzhumod.guiHunDunTable.error1=§c错误：玩家维度和交互实体不在同一维度，实体维度 = %d，玩家维度 = %d！
+fuzhumod.guiHunDunTable.error2=§c错误：交互实体类型错误，交互实体 = %s！
 

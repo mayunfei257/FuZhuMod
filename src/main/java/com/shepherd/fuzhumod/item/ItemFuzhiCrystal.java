@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.shepherd.fuzhumod.BaseControl;
 import com.shepherd.fuzhumod.base.Config;
+import com.shepherd.fuzhumod.type.CrystalItemType;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,7 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemFuZhiCrystal extends ItemCrystal{
+public class ItemFuZhiCrystal extends Item implements CrystalItemType{
 
 	public ItemFuZhiCrystal() {
 		super();

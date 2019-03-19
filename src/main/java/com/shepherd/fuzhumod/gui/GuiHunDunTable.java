@@ -6,8 +6,9 @@ import org.lwjgl.opengl.GL11;
 import com.shepherd.fuzhumod.BaseControl;
 import com.shepherd.fuzhumod.base.Config;
 import com.shepherd.fuzhumod.entity.TileEntityHunDunTable;
-import com.shepherd.fuzhumod.item.ItemCrystal;
 import com.shepherd.fuzhumod.message.ClientToServerMessage;
+import com.shepherd.fuzhumod.type.CrystalBlockType;
+import com.shepherd.fuzhumod.type.CrystalItemType;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.client.Minecraft;
@@ -45,32 +46,26 @@ public class GuiHunDunTable {
 			//tileEntity
 			this.addSlotToContainer(new Slot(entityInventory, 0, 80, 8) {//Crystal
 				public boolean isItemValid(ItemStack stack) {
-					return (stack != null) && stack.getItem() instanceof ItemCrystal;
+					return (stack != null) && stack.getItem() instanceof CrystalItemType;
 				}
 			});
 //			this.addSlotToContainer(new Slot(entityInventory, 0, 80, 14) {//Crystal
 //				public boolean isItemValid(ItemStack stack) {
-//					return (stack != null) && stack.getItem() instanceof ItemCrystal;
+//					return (stack != null) && stack.getItem() instanceof CrystalType;
 //				}
 //			});
 			for(int i = 0; i < 3; i++) {//Input
 				for(int j = 0; j < 3; j++) {
 					this.addSlotToContainer(new Slot(entityInventory, i * 3 + j + 1, 8 + j * 18, 8 + i * 18) {
 						public boolean isItemValid(ItemStack stack) {
-							return stack != null
-									&& (!(stack.getItem() instanceof ItemCrystal) || stack.getItem() == BaseControl.itemHunDunCrystal)
-									&& stack.getItem() != Item.getItemFromBlock(BaseControl.blockHunDunCrystal)
-									&& stack.getItem() != Item.getItemFromBlock(BaseControl.blockHunDunCao);
+							return stack != null && !(stack.getItem() instanceof CrystalItemType) && !(stack.getItem() instanceof CrystalBlockType);
 						}
 					});
 				}
 			}
 //			this.addSlotToContainer(new Slot(entityInventory, 1, 44, 34) {//Input
 //				public boolean isItemValid(ItemStack stack) {
-//					return stack != null
-//							&& (!(stack.getItem() instanceof ItemCrystal) || stack.getItem() == BaseControl.itemHunDunCrystal)
-//							&& stack.getItem() != Item.getItemFromBlock(BaseControl.blockHunDunCrystal)
-//							&& stack.getItem() != Item.getItemFromBlock(BaseControl.blockHunDunCao);
+//					return stack != null && !(stack.getItem() instanceof CrystalItemType) && !(stack.getItem() instanceof CrystalBlockType);
 //				}
 //			});
 			for(int i = 0; i < 3; i++) {//Output
@@ -130,6 +125,10 @@ public class GuiHunDunTable {
 			}
 			return itemstack;
 		}
+		
+		public ItemStack getCrystalItemStack() {
+			return entityInventory.getStackInSlot(0);
+		}
 	}
 
 	//GuiContainer
@@ -175,9 +174,19 @@ public class GuiHunDunTable {
 			super.initGui();
 			Keyboard.enableRepeatEvents(true);
 			this.buttonList.clear();
+			ItemStack itemCrystal = ((MyContainer)this.inventorySlots).getCrystalItemStack();
 			
-			GuiButton button = new GuiButton(0, this.guiLeft + 72, this.guiTop + 40, 32, 20, I18n.format(Config.MODID + ".guiHunDunTable.button.type1", new Object[]{}));
-			this.buttonList.add(button);
+			String buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type1", new Object[]{});
+			if(null != itemCrystal && itemCrystal.stackSize > 0) {
+				if(itemCrystal.getItem() == BaseControl.itemHunDunCrystal)
+					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type1", new Object[]{});
+				else if(itemCrystal.getItem() == BaseControl.itemFuZhiCrystal) 
+					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type2", new Object[]{});
+				else if(itemCrystal.getItem() == BaseControl.itemHuiMieCrystal || itemCrystal.getItem() == BaseControl.itemShengMingCrystal) 
+					buttonName = I18n.format(Config.MODID + ".guiHunDunTable.button.type3", new Object[]{});
+			}
+			
+			this.buttonList.add(new GuiButton(0, this.guiLeft + 72, this.guiTop + 40, 32, 20, buttonName));
 //			this.buttonList.add(new GuiButton(0, this.guiLeft + 65, this.guiTop + 55, 35, 20, I18n.format(Config.MODID + ".guiHunDunTable.button", new Object[]{})));
 
 		}

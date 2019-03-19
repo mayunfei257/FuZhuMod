@@ -20,6 +20,8 @@ public class Config {
     
     public static final String NBTTAG_TYPE_ATTACK = "attack";
     public static final String NBTTAG_TYPE_DEFENSE = "defense";
+    public static final float NBTTAG_TYPE_ATTACK_K = 0.2F;
+    public static final float NBTTAG_TYPE_DEFENSE_K = 0.1F;
     
 
 	private static Configuration configuration;

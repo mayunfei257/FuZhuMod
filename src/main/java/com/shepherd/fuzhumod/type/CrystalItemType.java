@@ -1,4 +1,4 @@
-package com.shepherd.fuzhumod.item;
+package com.shepherd.fuzhumod.type;
 
 import java.util.List;
 
@@ -12,17 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemCrystal extends Item{
+public interface CrystalItemType {
 
-	public ItemCrystal() {
-		super();
-		setMaxStackSize(64);
-		setCreativeTab(BaseControl.fuZhuTab);
-	}
-	
-	@Override
-    @SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
-		
-	}
 }
