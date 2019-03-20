@@ -13,13 +13,11 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid = Config.MODID, version = Config.VERSION)
 public class FuZhuMod {
 
-
 	@SidedProxy(clientSide = Config.CLIENTSIDE, serverSide = Config.SERVERSIDE)
 	public static CommonProxy proxy;
 	
 	@Instance(Config.MODID)
 	public static FuZhuMod instance;
-	
 
     public static Config config;
     

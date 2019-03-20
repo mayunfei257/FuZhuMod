@@ -8,6 +8,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraftforge.common.config.Configuration;
 
 public class Config {
+	//public static
     public static final String MODID = "fuzhumod";
     public static final String VERSION = "1.0.0";
     public static final String CLIENTSIDE = "com.shepherd.fuzhumod.ClientProxy";
@@ -21,23 +22,22 @@ public class Config {
     public static final String NBTTAG_TYPE_ATTACK = "attack";
     public static final String NBTTAG_TYPE_DEFENSE = "defense";
     
-    public static final float NBTTAG_TYPE_ATTACK_K = 1F;
-    public static final float NBTTAG_TYPE_ATTACK_CK = 1F;
-    public static final float NBTTAG_TYPE_ATTACK_CB = 0F;
-    public static final float NBTTAG_TYPE_DEFENSE_K = 0.25F;
-    public static final float NBTTAG_TYPE_DEFENSE_CK = 1F;
-    public static final float NBTTAG_TYPE_DEFENSE_CB = 0F;
-    
-
+    //private static
 	private static Configuration configuration;
 	private static Config config;
 	
-	private int MAX_COPY_TICK;
-	private int TOOL_HARVEST_LEVEL;
-	private int[] ARMOR_REDUCTION_AMOUNTS;
+    private double Nbttag_Type_Attack_K;
+    private double Nbttag_Type_Attack_CK;
+    private double Nbttag_Type_Attack_CB;
+    private double Nbttag_Type_Defense_K;
+    private double Nbttag_Type_Defense_CK;
+    private double Nbttag_Type_Defense_CB;
 	
-	private Item.ToolMaterial zijingToolMaterial;
-	private ItemArmor.ArmorMaterial zijingArmorMaterial;
+//	private int TOOL_HARVEST_LEVEL;
+//	private int[] ARMOR_REDUCTION_AMOUNTS;
+	
+//	private Item.ToolMaterial zijingToolMaterial;
+//	private ItemArmor.ArmorMaterial zijingArmorMaterial;
 	
 	private Config(FMLPreInitializationEvent e){
 		configuration = new Configuration(new File(e.getModConfigurationDirectory(), "/shepherd/fuzhu.cfg"));
@@ -60,29 +60,64 @@ public class Config {
 	}
 	
 	private void load(){
-		this.MAX_COPY_TICK = configuration.get("Base", "MAX_COPY_TICK", 40, "The wait time required to duplicate an item.").getInt();
-		this.TOOL_HARVEST_LEVEL = configuration.get("Tool", "TOOL_HARVEST_LEVEL", 3, "Tools level.").getInt();
-		this.ARMOR_REDUCTION_AMOUNTS = configuration.get("Armor", "ARMOR_REDUCTION_AMOUNTS", new int[]{4, 7, 6, 3}, "Armor defense values, respectively, the head, body, legs, feet.").getIntList();
-		
+		this.Nbttag_Type_Attack_K = configuration.get("Tool", "NBTTAG_TYPE_ATTACK_K", 2D, "Tools level.").getDouble();
+		this.Nbttag_Type_Attack_CK = configuration.get("Tool", "NBTTAG_TYPE_ATTACK_CK", 1D, "Tools level.").getDouble();
+		this.Nbttag_Type_Attack_CB = configuration.get("Tool", "NBTTAG_TYPE_ATTACK_CB", 0D, "Tools level.").getDouble();
+		this.Nbttag_Type_Defense_K = configuration.get("Tool", "NBTTAG_TYPE_DEFENSE_K", 0.5D, "Tools level.").getDouble();
+		this.Nbttag_Type_Defense_CK = configuration.get("Tool", "NBTTAG_TYPE_DEFENSE_CK", 1D, "Tools level.").getDouble();
+		this.Nbttag_Type_Defense_CB = configuration.get("Tool", "NBTTAG_TYPE_DEFENSE_CB", 0D, "Tools level.").getDouble();
+//		this.TOOL_HARVEST_LEVEL = configuration.get("Tool", "TOOL_HARVEST_LEVEL", 3, "Tools level.").getInt();
+//		this.ARMOR_REDUCTION_AMOUNTS = configuration.get("Armor", "ARMOR_REDUCTION_AMOUNTS", new int[]{4, 7, 6, 3}, "Armor defense values, respectively, the head, body, legs, feet.").getIntList();
+	}
+
+	public double getNbttag_Type_Attack_K() {
+		return Nbttag_Type_Attack_K;
+	}
+	public void setNbttag_Type_Attack_K(double nbttag_Type_Attack_K) {
+		Nbttag_Type_Attack_K = nbttag_Type_Attack_K;
+	}
+	public double getNbttag_Type_Attack_CK() {
+		return Nbttag_Type_Attack_CK;
+	}
+	public void setNbttag_Type_Attack_CK(double nbttag_Type_Attack_CK) {
+		Nbttag_Type_Attack_CK = nbttag_Type_Attack_CK;
+	}
+	public double getNbttag_Type_Attack_CB() {
+		return Nbttag_Type_Attack_CB;
+	}
+	public void setNbttag_Type_Attack_CB(double nbttag_Type_Attack_CB) {
+		Nbttag_Type_Attack_CB = nbttag_Type_Attack_CB;
+	}
+	public double getNbttag_Type_Defense_K() {
+		return Nbttag_Type_Defense_K;
+	}
+	public void setNbttag_Type_Defense_K(double nbttag_Type_Defense_K) {
+		Nbttag_Type_Defense_K = nbttag_Type_Defense_K;
+	}
+	public double getNbttag_Type_Defense_CK() {
+		return Nbttag_Type_Defense_CK;
+	}
+	public void setNbttag_Type_Defense_CK(double nbttag_Type_Defense_CK) {
+		Nbttag_Type_Defense_CK = nbttag_Type_Defense_CK;
+	}
+	public double getNbttag_Type_Defense_CB() {
+		return Nbttag_Type_Defense_CB;
+	}
+	public void setNbttag_Type_Defense_CB(double nbttag_Type_Defense_CB) {
+		Nbttag_Type_Defense_CB = nbttag_Type_Defense_CB;
 	}
 
 
-	public int getMAX_COPY_TICK() {
-		return MAX_COPY_TICK;
-	}
-	public void setMAX_COPY_TICK(int mAX_COPY_TICK) {
-		MAX_COPY_TICK = mAX_COPY_TICK;
-	}
-	public int getTOOL_HARVEST_LEVEL() {
-		return TOOL_HARVEST_LEVEL;
-	}
-	public int[] getARMOR_REDUCTION_AMOUNTS() {
-		return ARMOR_REDUCTION_AMOUNTS;
-	}
-	public Item.ToolMaterial getZijingToolMaterial() {
-		return zijingToolMaterial;
-	}
-	public ItemArmor.ArmorMaterial getZijingArmorMaterial() {
-		return zijingArmorMaterial;
-	}
+//	public int getTOOL_HARVEST_LEVEL() {
+//		return TOOL_HARVEST_LEVEL;
+//	}
+//	public int[] getARMOR_REDUCTION_AMOUNTS() {
+//		return ARMOR_REDUCTION_AMOUNTS;
+//	}
+//	public Item.ToolMaterial getZijingToolMaterial() {
+//		return zijingToolMaterial;
+//	}
+//	public ItemArmor.ArmorMaterial getZijingArmorMaterial() {
+//		return zijingArmorMaterial;
+//	}
 }

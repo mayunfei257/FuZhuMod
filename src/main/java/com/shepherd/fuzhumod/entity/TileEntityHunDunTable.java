@@ -1,6 +1,7 @@
 package com.shepherd.fuzhumod.entity;
 
 import com.shepherd.fuzhumod.BaseControl;
+import com.shepherd.fuzhumod.FuZhuMod;
 import com.shepherd.fuzhumod.base.Config;
 import com.shepherd.fuzhumod.type.CrystalBlockType;
 import com.shepherd.fuzhumod.type.CrystalItemType;
@@ -268,11 +269,11 @@ public class TileEntityHunDunTable  extends TileEntity implements ISidedInventor
 					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, 0F);
 					sourceItemStack.setTagCompound(stackTagCompound);
 				}
-				int quantity = (int) ((stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1) * Config.NBTTAG_TYPE_ATTACK_CK + Config.NBTTAG_TYPE_ATTACK_CB);
+				int quantity = (int) ((stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1) * FuZhuMod.config.getNbttag_Type_Attack_CK() + FuZhuMod.config.getNbttag_Type_Attack_CB());
 				if(hunDunTableItemStacks[0].stackSize >= quantity) {
 					stackTagCompound.setString(Config.NBTTAG_TYPE, Config.NBTTAG_TYPE_ATTACK);
 					stackTagCompound.setInteger(Config.NBTTAG_LEVEL, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1);
-					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) * Config.NBTTAG_TYPE_ATTACK_K);
+					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, (float) (stackTagCompound.getInteger(Config.NBTTAG_LEVEL) * FuZhuMod.config.getNbttag_Type_Attack_K()));
 					hunDunTableItemStacks[index] = sourceItemStack.copy();
 					sourceItemStack.stackSize = 0;
 					hunDunTableItemStacks[0].stackSize -= quantity;
@@ -309,11 +310,11 @@ public class TileEntityHunDunTable  extends TileEntity implements ISidedInventor
 					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, 0F);
 					sourceItemStack.setTagCompound(stackTagCompound);
 				}
-				int quantity = (int) ((stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1) * Config.NBTTAG_TYPE_DEFENSE_CK + Config.NBTTAG_TYPE_DEFENSE_CB);
+				int quantity = (int) ((stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1) * FuZhuMod.config.getNbttag_Type_Defense_CK() + FuZhuMod.config.getNbttag_Type_Defense_CB());
 				if(hunDunTableItemStacks[0].stackSize >= quantity) {
 					stackTagCompound.setString(Config.NBTTAG_TYPE, Config.NBTTAG_TYPE_DEFENSE);
 					stackTagCompound.setInteger(Config.NBTTAG_LEVEL, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) + 1);
-					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, stackTagCompound.getInteger(Config.NBTTAG_LEVEL) * Config.NBTTAG_TYPE_DEFENSE_K);
+					stackTagCompound.setFloat(Config.NBTTAG_STRENGTH, (float) (stackTagCompound.getInteger(Config.NBTTAG_LEVEL) * FuZhuMod.config.getNbttag_Type_Defense_K()));
 					hunDunTableItemStacks[index] = sourceItemStack.copy();
 					sourceItemStack.stackSize = 0;
 					hunDunTableItemStacks[0].stackSize -= quantity;
