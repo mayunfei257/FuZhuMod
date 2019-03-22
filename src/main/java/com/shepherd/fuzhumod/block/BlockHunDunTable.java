@@ -136,7 +136,7 @@ public class BlockHunDunTable  extends BlockContainer{
 
 		@Override
 		@SideOnly(Side.CLIENT)
-		public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
+		public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {
 			list.add(I18n.format(Config.MODID + ".blockHunDunTable.message1", new Object[]{}));
 			list.add(I18n.format(Config.MODID + ".blockHunDunTable.message2", new Object[]{}));
 			list.add("");
