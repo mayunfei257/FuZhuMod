@@ -7,13 +7,16 @@ import com.shepherd.fuzhumod.base.FuZhuWorldGenerator;
 import com.shepherd.fuzhumod.base.FuZhuGuiHandler;
 import com.shepherd.fuzhumod.block.BlockHunDunCao;
 import com.shepherd.fuzhumod.block.BlockHunDunCrystal;
+import com.shepherd.fuzhumod.block.BlockHunDunPortal;
 import com.shepherd.fuzhumod.block.BlockHunDunTable;
 import com.shepherd.fuzhumod.entity.TileEntityHunDunTable;
 import com.shepherd.fuzhumod.item.ItemFuZhiCrystal;
 import com.shepherd.fuzhumod.item.ItemHuiMieCrystal;
 import com.shepherd.fuzhumod.item.ItemHunDunCrystal;
+import com.shepherd.fuzhumod.item.ItemHunDunEye;
 import com.shepherd.fuzhumod.item.ItemShengMingCrystal;
 import com.shepherd.fuzhumod.message.ClientToServerMessage;
+import com.shepherd.fuzhumod.world.Test;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -28,50 +31,63 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 
 public class BaseControl {
-
     private static int nextID = 0;
 	public static SimpleNetworkWrapper netWorkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(Config.MODID);
+	
 	//Tab
 	public static final CreativeTabs fuZhuTab = new FuZhuTab();
-	
+	//Dimension
+	public static int dimensionID;
 	//Block
 	public static Block blockHunDunCrystal;
 	public static Block blockHunDunTable;
 	public static Block blockHunDunCao;
-	//FakePlayer
+	public static Block blockHunDunPortal;
 	//Item
 	public static Item itemHunDunCrystal;
 	public static Item itemHuiMieCrystal;
 	public static Item itemShengMingCrystal;
 	public static Item itemFuZhiCrystal;
-
+	public static Item itemHunDunEye;
+	//FakePlayer
+	
 	//ServerSide
 	public static void init(FMLPreInitializationEvent event){
+		//Dimension
+		dimensionID = FuZhuMod.config.getHunDun_Dimension_ID();
 		//Block
 		blockHunDunCrystal = new BlockHunDunCrystal();
 		blockHunDunTable = new BlockHunDunTable();
 		blockHunDunCao = new BlockHunDunCao();
+		blockHunDunPortal = new BlockHunDunPortal();
 		//Item
 		itemHunDunCrystal = new ItemHunDunCrystal();
 		itemHuiMieCrystal = new ItemHuiMieCrystal();
 		itemShengMingCrystal = new ItemShengMingCrystal();
 		itemFuZhiCrystal = new ItemFuZhiCrystal();
+		itemHunDunEye = new ItemHunDunEye();
 	}
 	
 	//ServerSide
 	public static void register(FMLPreInitializationEvent event){
+		//Dimension
+		DimensionManager.registerProviderType(dimensionID, Test.WorldProviderMod.class, false);
+		DimensionManager.registerDimension(dimensionID, dimensionID);
 		//Block
 		GameRegistry.registerBlock(blockHunDunCrystal, BlockHunDunCrystal.ItemBlockHunDunCrystal.class, blockHunDunCrystal.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunTable, BlockHunDunTable.ItemBlockHunDunTable.class, blockHunDunTable.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunCao, BlockHunDunCao.ItemBlocHunDunCao.class, blockHunDunCao.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunPortal, BlockHunDunPortal.ItemHunDunPortal.class, blockHunDunPortal.getUnlocalizedName());
 		//Item
 		GameRegistry.registerItem(itemHunDunCrystal, itemHunDunCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemHuiMieCrystal, itemHuiMieCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemShengMingCrystal, itemShengMingCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemFuZhiCrystal, itemFuZhiCrystal.getUnlocalizedName());
+		GameRegistry.registerItem(itemHunDunEye, itemHunDunEye.getUnlocalizedName());
 		//Entity
 //		EntityRegistry.registerModEntity(new ResourceLocation(Config.MODID + ":entitysupersnowman"), EntitySuperSnowman.class, "entitySuperSnowman", 263, ZijingMod.instance,64, 1, true, (204 << 16) + (0 << 8) + 204, (255 << 16) + (102 << 8) + 255);
 		//Message
@@ -87,11 +103,13 @@ public class BaseControl {
 		bolckResourceLoad(blockHunDunCrystal);
 		bolckResourceLoad(blockHunDunTable);
 		bolckResourceLoad(blockHunDunCao);
+		bolckResourceLoad(blockHunDunPortal);
 		//Item
 		itemResourceLoad(itemHunDunCrystal);
 		itemResourceLoad(itemHuiMieCrystal);
 		itemResourceLoad(itemShengMingCrystal);
 		itemResourceLoad(itemFuZhiCrystal);
+		itemResourceLoad(itemHunDunEye);
     }
 	
 	//ServerSide

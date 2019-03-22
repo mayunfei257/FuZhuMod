@@ -22,9 +22,13 @@ public class Config {
     public static final String NBTTAG_TYPE_ATTACK = "attack";
     public static final String NBTTAG_TYPE_DEFENSE = "defense";
     
-    //private static
+    //Config
+    private static Config config;
 	private static Configuration configuration;
-	private static Config config;
+
+    //private static
+	private int Max_High_HDC;
+	private int HunDun_Dimension_ID;
 	
     private double Nbttag_Type_Attack_K;
     private double Nbttag_Type_Attack_CK;
@@ -33,7 +37,6 @@ public class Config {
     private double Nbttag_Type_Defense_CK;
     private double Nbttag_Type_Defense_CB;
 	
-//	private int TOOL_HARVEST_LEVEL;
 //	private int[] ARMOR_REDUCTION_AMOUNTS;
 	
 //	private Item.ToolMaterial zijingToolMaterial;
@@ -60,16 +63,29 @@ public class Config {
 	}
 	
 	private void load(){
-		this.Nbttag_Type_Attack_K = configuration.get("Tool", "NBTTAG_TYPE_ATTACK_K", 2D, "Tools level.").getDouble();
-		this.Nbttag_Type_Attack_CK = configuration.get("Tool", "NBTTAG_TYPE_ATTACK_CK", 1D, "Tools level.").getDouble();
-		this.Nbttag_Type_Attack_CB = configuration.get("Tool", "NBTTAG_TYPE_ATTACK_CB", 0D, "Tools level.").getDouble();
-		this.Nbttag_Type_Defense_K = configuration.get("Tool", "NBTTAG_TYPE_DEFENSE_K", 0.5D, "Tools level.").getDouble();
-		this.Nbttag_Type_Defense_CK = configuration.get("Tool", "NBTTAG_TYPE_DEFENSE_CK", 1D, "Tools level.").getDouble();
-		this.Nbttag_Type_Defense_CB = configuration.get("Tool", "NBTTAG_TYPE_DEFENSE_CB", 0D, "Tools level.").getDouble();
-//		this.TOOL_HARVEST_LEVEL = configuration.get("Tool", "TOOL_HARVEST_LEVEL", 3, "Tools level.").getInt();
+		this.Max_High_HDC = configuration.get("Base", "Max_High_HDC", 3, "Hun Dun Cao max high.").getInt();
+		this.HunDun_Dimension_ID = configuration.get("Base", "HunDun_Dimension_ID", 3, "Hun Dun dimension ID.").getInt();
+		this.Nbttag_Type_Attack_K = configuration.get("Intensify", "NBTTAG_TYPE_ATTACK_K", 2D, "Tool intensify strength K.").getDouble();
+		this.Nbttag_Type_Attack_CK = configuration.get("Intensify", "NBTTAG_TYPE_ATTACK_CK", 1D, "Tool intensify need crystal amount K. (amount = K * level + B)").getDouble();
+		this.Nbttag_Type_Attack_CB = configuration.get("Intensify", "NBTTAG_TYPE_ATTACK_CB", 0D, "Tool intensify need crystal amount B. (amount = K * level + B)").getDouble();
+		this.Nbttag_Type_Defense_K = configuration.get("Intensify", "NBTTAG_TYPE_DEFENSE_K", 0.5D, "Armor intensify strength K.").getDouble();
+		this.Nbttag_Type_Defense_CK = configuration.get("Intensify", "NBTTAG_TYPE_DEFENSE_CK", 1D, "Armor intensify need crystal amount K. (amount = K * level + B)").getDouble();
+		this.Nbttag_Type_Defense_CB = configuration.get("Intensify", "NBTTAG_TYPE_DEFENSE_CB", 0D, "Armor intensify need crystal amount K. (amount = K * level + B)").getDouble();
 //		this.ARMOR_REDUCTION_AMOUNTS = configuration.get("Armor", "ARMOR_REDUCTION_AMOUNTS", new int[]{4, 7, 6, 3}, "Armor defense values, respectively, the head, body, legs, feet.").getIntList();
 	}
 
+	public int getMax_High_HDC() {
+		return Max_High_HDC;
+	}
+	public void setMax_High_HDC(int max_High_HDC) {
+		Max_High_HDC = max_High_HDC;
+	}
+	public int getHunDun_Dimension_ID() {
+		return HunDun_Dimension_ID;
+	}
+	public void setHunDun_Dimension_ID(int hunDun_Dimension_ID) {
+		HunDun_Dimension_ID = hunDun_Dimension_ID;
+	}
 	public double getNbttag_Type_Attack_K() {
 		return Nbttag_Type_Attack_K;
 	}
@@ -106,18 +122,4 @@ public class Config {
 	public void setNbttag_Type_Defense_CB(double nbttag_Type_Defense_CB) {
 		Nbttag_Type_Defense_CB = nbttag_Type_Defense_CB;
 	}
-
-
-//	public int getTOOL_HARVEST_LEVEL() {
-//		return TOOL_HARVEST_LEVEL;
-//	}
-//	public int[] getARMOR_REDUCTION_AMOUNTS() {
-//		return ARMOR_REDUCTION_AMOUNTS;
-//	}
-//	public Item.ToolMaterial getZijingToolMaterial() {
-//		return zijingToolMaterial;
-//	}
-//	public ItemArmor.ArmorMaterial getZijingArmorMaterial() {
-//		return zijingArmorMaterial;
-//	}
 }

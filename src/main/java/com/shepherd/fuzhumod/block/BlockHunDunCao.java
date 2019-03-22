@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.shepherd.fuzhumod.BaseControl;
+import com.shepherd.fuzhumod.FuZhuMod;
 import com.shepherd.fuzhumod.base.Config;
 import com.shepherd.fuzhumod.type.CrystalBlockType;
 
@@ -25,11 +26,12 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockHunDunCao extends BlockReed implements CrystalBlockType{
-	private static final int MaxHigh = 3;
+	protected int maxHigh;
 	IIcon la;
 
 	public BlockHunDunCao() {
 		super();
+		this.maxHigh = FuZhuMod.config.getMax_High_HDC();
         setHardness(0.01f);
         setResistance(2.0f);
 		setLightLevel(0.5f);
@@ -74,7 +76,7 @@ public class BlockHunDunCao extends BlockReed implements CrystalBlockType{
 			if (world.isAirBlock(x, y + 1, z)) {
 				int l;
 				for (l = 1; world.getBlock(x, y - l, z) == this; ++l) {}
-				if (l < MaxHigh) {
+				if (l < this.maxHigh) {
 					int i1 = world.getBlockMetadata(x, y, z);
 					if (i1 == 15) {
 						world.setBlock(x, y + 1, z, this);
