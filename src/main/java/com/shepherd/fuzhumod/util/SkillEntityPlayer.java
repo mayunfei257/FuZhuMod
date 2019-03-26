@@ -1,0 +1,195 @@
+package com.shepherd.fuzhumod.util;
+
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+public class SkillEntityPlayer extends SkillEntity{
+
+//	public static EntityArrowBingDan shootBingDanSkill(EntityPlayer player) {
+//		EntityArrowBingDan entityDan = null;
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_BingDan || player.isCreative()) {
+//    		int level = shepherdCapability.getLevel();
+//        	float attackDamage = (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//        	entityDan = shootBingDan(player, attackDamage, level * SLOWNESS_PROBABILITY_K, (int)(level * SLOWNESS_STRENGTH_K), true);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_BingDan);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_BingDan));
+//		}
+//        return entityDan;
+//	}
+//
+//	public static EntityArrowHuoDan shootHuoDanSkill(EntityPlayer player, boolean canExplosionOnBlock) {
+//		EntityArrowHuoDan entityDan = null;
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//		if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_HuoDan || player.isCreative()) {
+//			int level = shepherdCapability.getLevel();
+//			float attackDamage =  (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//			entityDan = shootHuoDan(player, attackDamage, level * EXPLOSION_PROBABILITY_K, level * EXPLOSION_STRENGTH_K, canExplosionOnBlock, true);
+//			shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_HuoDan);
+//		}else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_HuoDan));
+//		}
+//		return entityDan;
+//	}
+//	public static EntityArrowXukongDan shootXukongDanSkill(EntityPlayer player) {
+//		EntityArrowXukongDan entityDan = null;
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_XukongDan || player.isCreative()) {
+//    		int level = shepherdCapability.getLevel();
+//        	float attackDamage = (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//        	entityDan = shootXukongDan(player, 0, false);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_XukongDan);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_XukongDan));
+//		}
+//        return entityDan;
+//	}
+//	
+//	public static EntityArrowFengyinDan shootFengyinDanSkill(EntityPlayer player) {
+//		EntityArrowFengyinDan entityDan = null;
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_FengyinDan || player.isCreative()) {
+//    		int level = shepherdCapability.getLevel();
+//        	float attackDamage = (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//        	entityDan = shootFengyinDan(player, 0, false);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_FengyinDan);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_FengyinDan));
+//		}
+//        return entityDan;
+//	}
+	
+//	public static List<EntityArrowBingDan> shootBingDanGroupSkill(EntityPlayer player, EntityLivingBase target) {
+//		int level = player.getShepherdCapability().getLevel();
+//    	float attackDamage =  (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//		return shootBingDanGroup(player, target, attackDamage, level * SLOWNESS_PROBABILITY_K, (int)(level * SLOWNESS_STRENGTH_K), 2, 5);
+//	}
+//
+//	public static List<EntityArrowHuoDan> shootHuoDanGroupSkill(EntityPlayer player, EntityLivingBase target, boolean canExplosionOnBlock) {
+//		int level = player.getShepherdCapability().getLevel();
+//    	float attackDamage =  (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//		return shootHuoDanGroup(player, target, attackDamage, level * EXPLOSION_PROBABILITY_K, level * EXPLOSION_STRENGTH_K, canExplosionOnBlock, 2, 5);
+//	}
+//
+//	public static List<EntityArrowXukongDan> shootXukongDanGroupSkill(EntityPlayer player, EntityLivingBase target) {
+//		int level = player.getShepherdCapability().getLevel();
+////    	float attackDamage =  (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//		return shootXukongDanGroup(player, target, 0, 2, 5);
+//	}
+//	
+//	public static List<EntityArrowFengyinDan> shootFengyinDanGroupSkill(EntityPlayer player, EntityLivingBase target) {
+//		int level = player.getShepherdCapability().getLevel();
+////    	float attackDamage =  (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//		return shootFengyinDanGroup(player, target, 0, 2, 5);
+//	}
+
+	public static void levitationSkill(EntityPlayer player) {
+        addEffect(player, 25, 80, 0);
+	}
+
+	public static void removeEffectSkill(EntityPlayer player) {
+    	removeEffect(player);
+	}
+
+	public static boolean teleportUpSkill(EntityPlayer player, int x, int y, int z) {
+		return teleportUp(player, x, y, z, true);
+	}
+
+	public static boolean teleportDownSkill(EntityPlayer player, int x, int y, int z) {
+        return teleportDown(player,  x, y, z, true);
+	}
+	
+//	public static void thousandsFrozenSkill(EntityPlayer player) {
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_ThousandsFrozen || player.isCreative()) {
+//    		int level = shepherdCapability.getLevel();
+//    		BlockPos centerPos = player.getPosition();
+//        	float attackDamage = (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//        	thousandsFrozen( player, player.world, centerPos, (int)(level * ThousandsFrozen_Range_K), 3, (int)(level * ThousandsFrozen_Range_K), level * SLOWNESS_PROBABILITY_K, (int)(level * SLOWNESS_STRENGTH_K), attackDamage/2);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_ThousandsFrozen);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_ThousandsFrozen));
+//		}
+//	}
+//	
+//	public static void firestormSkill(EntityPlayer player) {
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_Firestorm || player.isCreative()) {
+//    		int level = shepherdCapability.getLevel();
+//    		BlockPos centerPos = player.getPosition();
+//        	float attackDamage = (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//    		firestorm(player, player.world, centerPos, (int)(level * Firestorm_Range_K), 3, (int)(level * Firestorm_Range_K), level * EXPLOSION_PROBABILITY_K, level * EXPLOSION_STRENGTH_K, true, attackDamage/2);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_Firestorm);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_Firestorm));
+//		}
+//	}
+//	
+//	public static void firestormSkill(EntityPlayer player, EntityLivingBase target) {
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_Firestorm || player.isCreative()) {
+//    		int level = shepherdCapability.getLevel();
+//    		BlockPos centerPos = target.getPosition();
+//        	float attackDamage = (float)player.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getBaseValue();
+//    		firestorm(player, player.world, centerPos, (int)(level * Firestorm_Range_K/2), 3, (int)(level * Firestorm_Range_K/2), level * EXPLOSION_PROBABILITY_K, level * EXPLOSION_STRENGTH_K, false, attackDamage/2);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_Firestorm);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_Firestorm));
+//		}
+//	}
+//	
+//	public static BlockPos randomTeleportSkill(EntityPlayer player) {
+//		BlockPos resultPos = null;
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_RandomTeleport || player.isCreative()) {
+//        	resultPos = randomTeleport(player, 2, 5);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_RandomTeleport);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_RandomTeleport));
+//		}
+//        return resultPos;
+//	}
+//
+//	public static BlockPos randomTeleportFarSkill(EntityPlayer player) {
+//		BlockPos resultPos = null;
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_RandomTeleportFar || player.isCreative()) {
+//        	resultPos = randomTeleportFar(player, 3, 1000);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_RandomTeleportFar);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_RandomTeleportFar));
+//		}
+//        return resultPos;
+//	}
+//	
+//	public static void growBlockSkill(EntityPlayer player, BlockPos pos) {
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_GrowBlock || player.isCreative()) {
+//        	growBlock(player.world, pos);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_GrowBlock);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_GrowBlock));
+//		}
+//    }
+//	
+//	public static void growAreaBlockSkill(EntityPlayer player, BlockPos pos) {
+//		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
+//        if(null != shepherdCapability && shepherdCapability.getMagic() >= MagicSkill_GrowAreaBlock || player.isCreative()) {
+//        	growAreaBlock(player.world, pos, 4, 1, 4);
+//    		shepherdCapability.setMagic(player.isCreative() ? shepherdCapability.getMagic() : shepherdCapability.getMagic() - MagicSkill_GrowAreaBlock);
+//        }else {
+//			player.sendMessage(StringUtil.MagicIsNotEnough(MagicSkill_GrowBlock));
+//		}
+//    }
+	
+//	public static void chainDropSkill(ItemStack toolStack, World world, IBlockState blockState, BlockPos pos, EntityPlayer player) {
+//		int damage = toolStack.getMaxDamage() - toolStack.getItemDamage();
+//		int maxAmount = damage > ZijingMod.config.getTOOL_DMAMOUNT()/2 ? ZijingMod.config.getTOOL_DMAMOUNT() : damage * 2;
+//		int amount = chainDrop(toolStack, world, blockState, pos, maxAmount);
+//		toolStack.damageItem(amount/2 >= 1 ? amount/2 : 1, player);
+//	}
+}
