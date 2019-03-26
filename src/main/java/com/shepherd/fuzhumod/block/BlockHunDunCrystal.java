@@ -20,8 +20,8 @@ public class BlockHunDunCrystal extends Block implements CrystalBlockType{
 	public BlockHunDunCrystal() {
 		super(Material.iron);
 		setHardness(50f);
-		setResistance(1000.0f);
-		setLightLevel(0.5f);
+		setResistance(5000.0f);
+		setLightLevel(0.7f);
 		setHarvestLevel("pickaxe", 0);
 		setStepSound(Block.soundTypeMetal);
 		setBlockName("blockHunDunCrystal");

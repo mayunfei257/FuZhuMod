@@ -319,9 +319,9 @@ public class BlockHunDunPortal extends BlockBreakable {
 	}
 
 	//ItemBlock
-	public static class ItemHunDunPortal extends ItemBlock{
+	public static class ItemBlockHunDunPortal extends ItemBlock{
 
-		public ItemHunDunPortal(Block blockHunDunPortal) {
+		public ItemBlockHunDunPortal(Block blockHunDunPortal) {
 			super(blockHunDunPortal);
 		}
 

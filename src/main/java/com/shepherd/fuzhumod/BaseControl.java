@@ -8,6 +8,7 @@ import com.shepherd.fuzhumod.base.FuZhuGuiHandler;
 import com.shepherd.fuzhumod.block.BlockHunDunCao;
 import com.shepherd.fuzhumod.block.BlockHunDunCrystal;
 import com.shepherd.fuzhumod.block.BlockHunDunPortal;
+import com.shepherd.fuzhumod.block.BlockHunDunStone;
 import com.shepherd.fuzhumod.block.BlockHunDunTable;
 import com.shepherd.fuzhumod.entity.TileEntityHunDunTable;
 import com.shepherd.fuzhumod.item.ItemFuZhiCrystal;
@@ -26,6 +27,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -47,6 +49,8 @@ public class BaseControl {
 	public static Block blockHunDunTable;
 	public static Block blockHunDunCao;
 	public static Block blockHunDunPortal;
+	public static Block blockHunDunStone;
+//	public static Block blockHunDunStone_stairs;
 	//Item
 	public static Item itemHunDunCrystal;
 	public static Item itemHuiMieCrystal;
@@ -64,6 +68,8 @@ public class BaseControl {
 		blockHunDunTable = new BlockHunDunTable();
 		blockHunDunCao = new BlockHunDunCao();
 		blockHunDunPortal = new BlockHunDunPortal();
+		blockHunDunStone = new BlockHunDunStone().setBlockName("blockHunDunStone").setBlockTextureName(Config.MODID + ":blockhundunstone");
+//		blockHunDunStone_stairs = new BlockStairs(blockHunDunStone_normal, 0).setBlockName("stairsStoneBrickSmooth"));
 		//Item
 		itemHunDunCrystal = new ItemHunDunCrystal();
 		itemHuiMieCrystal = new ItemHuiMieCrystal();
@@ -81,7 +87,8 @@ public class BaseControl {
 		GameRegistry.registerBlock(blockHunDunCrystal, BlockHunDunCrystal.ItemBlockHunDunCrystal.class, blockHunDunCrystal.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunTable, BlockHunDunTable.ItemBlockHunDunTable.class, blockHunDunTable.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunCao, BlockHunDunCao.ItemBlocHunDunCao.class, blockHunDunCao.getUnlocalizedName());
-		GameRegistry.registerBlock(blockHunDunPortal, BlockHunDunPortal.ItemHunDunPortal.class, blockHunDunPortal.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunPortal, BlockHunDunPortal.ItemBlockHunDunPortal.class, blockHunDunPortal.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunStone, BlockHunDunStone.ItemBlockHunDunStone.class, blockHunDunStone.getUnlocalizedName());
 		//Item
 		GameRegistry.registerItem(itemHunDunCrystal, itemHunDunCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemHuiMieCrystal, itemHuiMieCrystal.getUnlocalizedName());
@@ -100,16 +107,7 @@ public class BaseControl {
 	//ClientSide
     public static void resourceLoad(FMLPreInitializationEvent event){
     	//Block
-		bolckResourceLoad(blockHunDunCrystal);
-		bolckResourceLoad(blockHunDunTable);
-		bolckResourceLoad(blockHunDunCao);
-		bolckResourceLoad(blockHunDunPortal);
 		//Item
-		itemResourceLoad(itemHunDunCrystal);
-		itemResourceLoad(itemHuiMieCrystal);
-		itemResourceLoad(itemShengMingCrystal);
-		itemResourceLoad(itemFuZhiCrystal);
-		itemResourceLoad(itemHunDunEye);
     }
 	
 	//ServerSide
@@ -148,14 +146,7 @@ public class BaseControl {
 	}
 
 	//*****************************************************************************************************************************************************//
-	//Render items
-  	private static void itemResourceLoad(Item item){
-//  		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName() , "inventory"));
-  	}
-  	//Render block
-  	private static void bolckResourceLoad(Block block){
-//  		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName() , "inventory"));
-  	}
+	
 	//Orderly synthesis method
 	private static void addRecipe(ItemStack itemStack, Object item1,Object item2,Object item3,Object item4,Object item5,Object item6,Object item7,Object item8,Object item9){
 		Object[] object = new Object[]{"012", "345", "678",
