@@ -28,20 +28,4 @@ public class BlockHunDunCrystal extends Block implements CrystalBlockType{
 		setBlockTextureName(Config.MODID + ":blockhunduncrystal");
 		setCreativeTab(BaseControl.fuZhuTab);
 	}
-
-	//ItemBlock
-	public static class ItemBlockHunDunCrystal extends ItemBlock{
-
-		public ItemBlockHunDunCrystal(Block blockHunDunCrystal) {
-			super(blockHunDunCrystal);
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {
-			list.add(I18n.format(Config.MODID + ".blockHunDunCrystal.message1", new Object[]{}));
-			list.add(I18n.format(Config.MODID + ".blockHunDunCrystal.message2", new Object[]{}));
-			list.add("");
-		}
-	}
 }

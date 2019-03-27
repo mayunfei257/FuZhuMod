@@ -6,10 +6,12 @@ tile.blockHunDunCrystal.name=§6混沌晶石块
 tile.blockHunDunTable.name=§6混沌台
 tile.blockHunDunCao.name=§6混沌草
 tile.blockHunDunPortal.name=§6混沌之门
-tile.blockHunDunStone.name=§6混沌石块
-tile.blockHunDunStone.default.name=§6混沌石块0
-tile.blockHunDunStone.chiseled.name=§6混沌石块1
-tile.blockHunDunStone.smooth.name=§6混沌石块2
+tile.blockHunDunStone.name=§3混沌石
+tile.blockHunDunStone.default.name=§3混沌石
+tile.blockHunDunStone.chiseled.name=§3錾制混沌石
+tile.blockHunDunStone.smooth.name=§3平滑混沌石
+tile.blockHunDunStoneStairs.name=§3混沌石楼梯
+tile.blockHunDunStoneSlab.name=§3混沌石台阶
 
 #Item----------------------------------------------------------------------
 item.itemHunDunCrystal.name=§6混沌晶石
@@ -25,6 +27,9 @@ fuzhumod.blockHunDunTable.message1=§7可以承受极大能量的混沌台，可
 fuzhumod.blockHunDunTable.message2=§7分解混沌晶石，强化物品，复制物品等
 fuzhumod.blockHunDunCao.message1=§7从无尽虚空中抽取混沌能量的混沌草，可提炼出混沌晶石
 fuzhumod.blockHunDunPortal.message1=§7混沌世界的传送门
+fuzhumod.blockHunDunStone.default.message1=§7普通的混沌石块
+fuzhumod.blockHunDunStone.chiseled.message1=§7錾制的混沌石块
+fuzhumod.blockHunDunStone.smooth.message1=§7平滑的混沌石块
 
 #ItemInfor-----------------------------------------------------------------
 fuzhumod.itemHunDunCrystal.message1=§5万物之初，世界之始

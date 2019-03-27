@@ -317,19 +317,4 @@ public class BlockHunDunPortal extends BlockBreakable {
 	public int idPicked(World par1World, int par2, int par3, int par4) {
 		return 0;
 	}
-
-	//ItemBlock
-	public static class ItemBlockHunDunPortal extends ItemBlock{
-
-		public ItemBlockHunDunPortal(Block blockHunDunPortal) {
-			super(blockHunDunPortal);
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {
-			list.add(I18n.format(Config.MODID + ".blockHunDunPortal.message1", new Object[]{}));
-			list.add("");
-		}
-	}
 }

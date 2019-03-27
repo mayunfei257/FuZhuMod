@@ -126,20 +126,4 @@ public class BlockHunDunTable  extends BlockContainer{
 		}
 		super.breakBlock(world, x, y, z, bolck, metadata);
 	}
-	
-	//ItemBlock
-	public static class ItemBlockHunDunTable extends ItemBlock{
-
-		public ItemBlockHunDunTable(Block blockHunDunTable) {
-			super(blockHunDunTable);
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {
-			list.add(I18n.format(Config.MODID + ".blockHunDunTable.message1", new Object[]{}));
-			list.add(I18n.format(Config.MODID + ".blockHunDunTable.message2", new Object[]{}));
-			list.add("");
-		}
-	}
 }

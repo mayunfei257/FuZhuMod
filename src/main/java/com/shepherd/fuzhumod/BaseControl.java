@@ -2,15 +2,20 @@ package com.shepherd.fuzhumod;
 
 import com.shepherd.fuzhumod.base.Config;
 import com.shepherd.fuzhumod.base.FuZhuEvent;
+import com.shepherd.fuzhumod.base.FuZhuGuiHandler;
 import com.shepherd.fuzhumod.base.FuZhuTab;
 import com.shepherd.fuzhumod.base.FuZhuWorldGenerator;
-import com.shepherd.fuzhumod.base.FuZhuGuiHandler;
 import com.shepherd.fuzhumod.block.BlockHunDunCao;
 import com.shepherd.fuzhumod.block.BlockHunDunCrystal;
 import com.shepherd.fuzhumod.block.BlockHunDunPortal;
 import com.shepherd.fuzhumod.block.BlockHunDunStone;
 import com.shepherd.fuzhumod.block.BlockHunDunTable;
+import com.shepherd.fuzhumod.block.BlockSlabBase;
+import com.shepherd.fuzhumod.block.BlockStairsBase;
 import com.shepherd.fuzhumod.entity.TileEntityHunDunTable;
+import com.shepherd.fuzhumod.item.ItemBlockBase;
+import com.shepherd.fuzhumod.item.ItemBlockMetaBase;
+import com.shepherd.fuzhumod.item.ItemBlockSlabBase;
 import com.shepherd.fuzhumod.item.ItemFuZhiCrystal;
 import com.shepherd.fuzhumod.item.ItemHuiMieCrystal;
 import com.shepherd.fuzhumod.item.ItemHunDunCrystal;
@@ -27,7 +32,6 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockStairs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -50,7 +54,8 @@ public class BaseControl {
 	public static Block blockHunDunCao;
 	public static Block blockHunDunPortal;
 	public static Block blockHunDunStone;
-//	public static Block blockHunDunStone_stairs;
+	public static Block blockHunDunStoneStairs;
+	public static Block blockHunDunStoneSlab;
 	//Item
 	public static Item itemHunDunCrystal;
 	public static Item itemHuiMieCrystal;
@@ -68,8 +73,9 @@ public class BaseControl {
 		blockHunDunTable = new BlockHunDunTable();
 		blockHunDunCao = new BlockHunDunCao();
 		blockHunDunPortal = new BlockHunDunPortal();
-		blockHunDunStone = new BlockHunDunStone().setBlockName("blockHunDunStone").setBlockTextureName(Config.MODID + ":blockhundunstone");
-//		blockHunDunStone_stairs = new BlockStairs(blockHunDunStone_normal, 0).setBlockName("stairsStoneBrickSmooth"));
+		blockHunDunStone = new BlockHunDunStone();
+		blockHunDunStoneStairs = new BlockStairsBase(blockHunDunStone, 0).setBlockName("blockHunDunStoneStairs");
+		blockHunDunStoneSlab = new BlockSlabBase(blockHunDunStone, 0, false).setBlockName("blockHunDunStoneSlab");
 		//Item
 		itemHunDunCrystal = new ItemHunDunCrystal();
 		itemHuiMieCrystal = new ItemHuiMieCrystal();
@@ -84,11 +90,13 @@ public class BaseControl {
 		DimensionManager.registerProviderType(dimensionID, Test.WorldProviderMod.class, false);
 		DimensionManager.registerDimension(dimensionID, dimensionID);
 		//Block
-		GameRegistry.registerBlock(blockHunDunCrystal, BlockHunDunCrystal.ItemBlockHunDunCrystal.class, blockHunDunCrystal.getUnlocalizedName());
-		GameRegistry.registerBlock(blockHunDunTable, BlockHunDunTable.ItemBlockHunDunTable.class, blockHunDunTable.getUnlocalizedName());
-		GameRegistry.registerBlock(blockHunDunCao, BlockHunDunCao.ItemBlocHunDunCao.class, blockHunDunCao.getUnlocalizedName());
-		GameRegistry.registerBlock(blockHunDunPortal, BlockHunDunPortal.ItemBlockHunDunPortal.class, blockHunDunPortal.getUnlocalizedName());
-		GameRegistry.registerBlock(blockHunDunStone, BlockHunDunStone.ItemBlockHunDunStone.class, blockHunDunStone.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunCrystal, ItemBlockBase.class, blockHunDunCrystal.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunTable, ItemBlockBase.class, blockHunDunTable.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunCao, ItemBlockBase.class, blockHunDunCao.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunPortal, ItemBlockBase.class, blockHunDunPortal.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunStone, ItemBlockMetaBase.class, blockHunDunStone.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunStoneStairs, ItemBlockBase.class, blockHunDunStoneStairs.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunStoneSlab, ItemBlockSlabBase.class, blockHunDunStoneSlab.getUnlocalizedName());
 		//Item
 		GameRegistry.registerItem(itemHunDunCrystal, itemHunDunCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemHuiMieCrystal, itemHuiMieCrystal.getUnlocalizedName());

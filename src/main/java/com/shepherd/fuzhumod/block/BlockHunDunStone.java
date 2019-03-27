@@ -32,15 +32,14 @@ public class BlockHunDunStone extends Block{
 	public BlockHunDunStone(){
 		super(Material.rock);
 		setHarvestLevel("pickaxe", 0);
+		setHardness(6f);
+		setResistance(600.0f);
 		setStepSound(Block.soundTypeMetal);
+		setBlockName("blockHunDunStone");
+		setBlockTextureName(Config.MODID + ":blockhundunstone");
 		setCreativeTab(BaseControl.fuZhuTab);
-		setHardness(5f);
-		setResistance(500.0f);
 	}
 
-	/**
-	 * Gets the block's texture. Args: side, meta
-	 */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta){
@@ -49,24 +48,16 @@ public class BlockHunDunStone extends Block{
 		}else if(side == 1){
 			return this.topIcon;
 		}else{
-			if (meta < 0 || meta >= this.sideIcons.length){
-				meta = 0;
-			}
+			if (meta < 0 || meta >= this.sideIcons.length) meta = 0;
 			return this.sideIcons[meta];
 		}
 	}
 
-	/**
-	 * Determines the damage on the item the block drops. Used in cloth and wood.
-	 */
 	@Override
-	public int damageDropped(int p_149692_1_){
-		return p_149692_1_;
+	public int damageDropped(int damage){
+		return damage;
 	}
 
-	/**
-	 * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
-	 */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubBlocks(Item item, CreativeTabs tab, List blockList){
@@ -86,22 +77,5 @@ public class BlockHunDunStone extends Block{
 
 		this.topIcon = iconRegister.registerIcon(this.getTextureName() + "_top");
 		this.bottomIcon = iconRegister.registerIcon(this.getTextureName() + "_bottom");
-	}
-
-	//ItemBlock
-	public static class ItemBlockHunDunStone extends ItemMultiTexture{
-		
-		public ItemBlockHunDunStone(Block blockHunDunStone) {
-			super(blockHunDunStone, blockHunDunStone, BlockHunDunStone.nameStrings);
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {
-			int meta = itemStack.getItemDamage();
-//			list.add(I18n.format(Config.MODID + ".blockHunDunCrystal.message1", new Object[]{}));
-//			list.add(I18n.format(Config.MODID + ".blockHunDunCrystal.message2", new Object[]{}));
-//			list.add("");
-		}
 	}
 }

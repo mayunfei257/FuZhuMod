@@ -104,19 +104,4 @@ public class BlockHunDunCao extends BlockReed implements CrystalBlockType{
 	public Item getItemDropped(int par1, Random random, int par3) {
 		return Item.getItemFromBlock(BaseControl.blockHunDunCao);
 	}
-	
-	//ItemBlock
-	public static class ItemBlocHunDunCao extends ItemBlock{
-
-		public ItemBlocHunDunCao(Block blockHunDunCao) {
-			super(blockHunDunCao);
-		}
-
-		@Override
-		@SideOnly(Side.CLIENT)
-		public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {
-			list.add(I18n.format(Config.MODID + ".blockHunDunCao.message1", new Object[]{}));
-			list.add("");
-		}
-	}
 }
