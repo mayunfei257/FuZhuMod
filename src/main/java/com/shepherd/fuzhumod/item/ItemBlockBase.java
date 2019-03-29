@@ -12,6 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 
 public class ItemBlockBase extends ItemBlock{
 	protected final Block block;
@@ -21,6 +22,16 @@ public class ItemBlockBase extends ItemBlock{
 		this.block = block;
 	}
 
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int damage){
+		return super.getIconFromDamage(damage);
+//    	if(BaseControl.blockHunDunCao == block) {
+//    		return block.getIcon(2, 16);
+//    	}else {
+//    		return super.getIconFromDamage(damage);
+//    	}
+    }
+    
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {

@@ -22,14 +22,12 @@ public class BlockSlabBase extends BlockSlab{
 	protected final Block baseBlock;
 	protected final int meta;
 
-	public BlockSlabBase(Block block, int meta, boolean p_i45431_1_) {
-		super(p_i45431_1_, block.getMaterial());
+	public BlockSlabBase(Block block, int meta, boolean isDouble) {
+		super(isDouble, block.getMaterial());
 		this.baseBlock = block;
 		this.meta = meta;
-//		this.setHardness(block.blockHardness);
-//		this.setResistance(block.blockResistance / 3.0F);
-		this.setHardness(5);
-		this.setResistance(50);
+		this.setHardness(block.blockHardness);
+		this.setResistance(block.blockResistance / 3.0F);
 		this.setStepSound(block.stepSound);
 		this.setLightOpacity(255);
 		setCreativeTab(BaseControl.fuZhuTab);
@@ -37,11 +35,11 @@ public class BlockSlabBase extends BlockSlab{
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta){
-        return this.baseBlock.getIcon(side, meta);
+        return this.baseBlock.getIcon(side, this.meta);
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister p_149651_1_){
+	public void registerBlockIcons(IIconRegister iconRegister){
 	}
 
 	public String func_150002_b(int meta){

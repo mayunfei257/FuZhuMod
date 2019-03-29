@@ -35,7 +35,7 @@ public class BlockHunDunTable  extends BlockContainer{
 		super(Material.anvil);
 		working = false;
         setHardness(10f);
-        setResistance(100.0f);
+        setResistance(1000.0f);
         setHarvestLevel("pickaxe", 0);
         setStepSound(Block.soundTypeMetal);
         setBlockName("blockHunDunTable");

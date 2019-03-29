@@ -27,7 +27,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockHunDunCao extends BlockReed implements CrystalBlockType{
 	protected int maxHigh;
-	IIcon la;
+	protected IIcon[] icon;
 
 	public BlockHunDunCao() {
 		super();
@@ -44,13 +44,17 @@ public class BlockHunDunCao extends BlockReed implements CrystalBlockType{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta) {
-		return this.la;
+		meta = (meta > 15 || meta < 0) ? 0 : meta;
+		return this.icon[meta/2];
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		la = reg.registerIcon(this.getTextureName());
+		this.icon = new IIcon[8];
+		for(int meta = 0; meta < icon.length; meta++) {
+			icon[meta] = reg.registerIcon(this.getTextureName() + "_" + meta);
+		}
 	}
 
 	@Override
@@ -73,18 +77,20 @@ public class BlockHunDunCao extends BlockReed implements CrystalBlockType{
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random) {
 		if (world.getBlock(x, y - 1, z) == BaseControl.blockHunDunCao || this.func_150170_e(world, x, y, z)) {
+			int i1 = world.getBlockMetadata(x, y, z);
 			if (world.isAirBlock(x, y + 1, z)) {
 				int l;
 				for (l = 1; world.getBlock(x, y - l, z) == this; ++l) {}
-				if (l < this.maxHigh) {
-					int i1 = world.getBlockMetadata(x, y, z);
-					if (i1 == 15) {
+				if (l < this.maxHigh ) {
+					if( i1 >= 15) {
 						world.setBlock(x, y + 1, z, this);
-						world.setBlockMetadataWithNotify(x, y, z, 0, 4);
-					} else {
-						world.setBlockMetadataWithNotify(x, y, z, i1 + 1, 4);
+						world.setBlockMetadataWithNotify(x, y, z, 0, 2);
+					}else {
+						world.setBlockMetadataWithNotify(x, y, z, i1 + 1, 2);
 					}
 				}
+			}else if (i1 > 0 && world.getBlock(x, y + 1, z) == BaseControl.blockHunDunCao) {
+				world.setBlockMetadataWithNotify(x, y, z, 0, 2);
 			}
 		}
 	}

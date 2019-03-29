@@ -76,10 +76,8 @@ public class ChunkProviderModded implements IChunkProvider{
 	private static final String __OBFID = "CL_00000392";
 
 	{
-		genNetherBridge = (MapGenNetherBridge) TerrainGen.getModdedMapGen(genNetherBridge,
-				net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_BRIDGE);
-		netherCaveGenerator = TerrainGen.getModdedMapGen(netherCaveGenerator,
-				net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE);
+		genNetherBridge = (MapGenNetherBridge) TerrainGen.getModdedMapGen(genNetherBridge, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_BRIDGE);
+		netherCaveGenerator = TerrainGen.getModdedMapGen(netherCaveGenerator, net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.NETHER_CAVE);
 	}
 
 	public ChunkProviderModded(World par1World, long par2) {
@@ -94,8 +92,7 @@ public class ChunkProviderModded implements IChunkProvider{
 		this.netherNoiseGen6 = new NoiseGeneratorOctaves(this.hellRNG, 10);
 		this.netherNoiseGen7 = new NoiseGeneratorOctaves(this.hellRNG, 16);
 
-		NoiseGenerator[] noiseGens = {netherNoiseGen1, netherNoiseGen2, netherNoiseGen3, slowsandGravelNoiseGen, netherrackExculsivityNoiseGen,
-				netherNoiseGen6, netherNoiseGen7};
+		NoiseGenerator[] noiseGens = {netherNoiseGen1, netherNoiseGen2, netherNoiseGen3, slowsandGravelNoiseGen, netherrackExculsivityNoiseGen, netherNoiseGen6, netherNoiseGen7};
 		noiseGens = TerrainGen.getModdedNoiseGenerators(par1World, this.hellRNG, noiseGens);
 		this.netherNoiseGen1 = (NoiseGeneratorOctaves) noiseGens[0];
 		this.netherNoiseGen2 = (NoiseGeneratorOctaves) noiseGens[1];
@@ -174,17 +171,13 @@ public class ChunkProviderModded implements IChunkProvider{
 	public void func_147418_b(int p_147418_1_, int p_147418_2_, Block[] p_147418_3_) {
 		ChunkProviderEvent.ReplaceBiomeBlocks event = new ChunkProviderEvent.ReplaceBiomeBlocks(this, p_147418_1_, p_147418_2_, p_147418_3_, null);
 		MinecraftForge.EVENT_BUS.post(event);
-		if (event.getResult() == cpw.mods.fml.common.eventhandler.Event.Result.DENY)
-			return;
+		if (event.getResult() == cpw.mods.fml.common.eventhandler.Event.Result.DENY) return;
 
 		byte b0 = 64;
 		double d0 = 0.03125D;
-		this.slowsandNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.slowsandNoise, p_147418_1_ * 16, p_147418_2_ * 16, 0, 16, 16,
-				1, d0, d0, 1.0D);
-		this.gravelNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.gravelNoise, p_147418_1_ * 16, 109, p_147418_2_ * 16, 16, 1, 16,
-				d0, 1.0D, d0);
-		this.netherrackExclusivityNoise = this.netherrackExculsivityNoiseGen.generateNoiseOctaves(this.netherrackExclusivityNoise,
-				p_147418_1_ * 16, p_147418_2_ * 16, 0, 16, 16, 1, d0 * 2.0D, d0 * 2.0D, d0 * 2.0D);
+		this.slowsandNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.slowsandNoise, p_147418_1_ * 16, p_147418_2_ * 16, 0, 16, 16, 1, d0, d0, 1.0D);
+		this.gravelNoise = this.slowsandGravelNoiseGen.generateNoiseOctaves(this.gravelNoise, p_147418_1_ * 16, 109, p_147418_2_ * 16, 16, 1, 16, d0, 1.0D, d0);
+		this.netherrackExclusivityNoise = this.netherrackExculsivityNoiseGen.generateNoiseOctaves(this.netherrackExclusivityNoise, p_147418_1_ * 16, p_147418_2_ * 16, 0, 16, 16, 1, d0 * 2.0D, d0 * 2.0D, d0 * 2.0D);
 
 		for (int k = 0; k < 16; ++k) {
 			for (int l = 0; l < 16; ++l) {
@@ -269,8 +262,7 @@ public class ChunkProviderModded implements IChunkProvider{
 		this.netherCaveGenerator.func_151539_a(this, this.worldObj, par1, par2, ablock);
 		this.genNetherBridge.func_151539_a(this, this.worldObj, par1, par2, ablock);
 		Chunk chunk = new Chunk(this.worldObj, ablock, par1, par2);
-		BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[]) null, par1 * 16, par2 * 16,
-				16, 16);
+		BiomeGenBase[] abiomegenbase = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[]) null, par1 * 16, par2 * 16, 16, 16);
 		byte[] abyte = chunk.getBiomeArray();
 
 		for (int k = 0; k < abyte.length; ++k) {
@@ -286,8 +278,7 @@ public class ChunkProviderModded implements IChunkProvider{
 	 * the [empty] noise array, the position, and the size.
 	 */
 	private double[] initializeNoiseField(double[] par1ArrayOfDouble, int par2, int par3, int par4, int par5, int par6, int par7) {
-		ChunkProviderEvent.InitNoiseField event = new ChunkProviderEvent.InitNoiseField(this, par1ArrayOfDouble, par2, par3, par4, par5, par6,
-				par7);
+		ChunkProviderEvent.InitNoiseField event = new ChunkProviderEvent.InitNoiseField(this, par1ArrayOfDouble, par2, par3, par4, par5, par6, par7);
 		MinecraftForge.EVENT_BUS.post(event);
 		if (event.getResult() == cpw.mods.fml.common.eventhandler.Event.Result.DENY)
 			return event.noisefield;
@@ -300,8 +291,7 @@ public class ChunkProviderModded implements IChunkProvider{
 		double d1 = 2053.236D;
 		this.noiseData4 = this.netherNoiseGen6.generateNoiseOctaves(this.noiseData4, par2, par3, par4, par5, 1, par7, 1.0D, 0.0D, 1.0D);
 		this.noiseData5 = this.netherNoiseGen7.generateNoiseOctaves(this.noiseData5, par2, par3, par4, par5, 1, par7, 100.0D, 0.0D, 100.0D);
-		this.noiseData1 = this.netherNoiseGen3.generateNoiseOctaves(this.noiseData1, par2, par3, par4, par5, par6, par7, d0 / 80.0D, d1 / 60.0D,
-				d0 / 80.0D);
+		this.noiseData1 = this.netherNoiseGen3.generateNoiseOctaves(this.noiseData1, par2, par3, par4, par5, par6, par7, d0 / 80.0D, d1 / 60.0D, d0 / 80.0D);
 		this.noiseData2 = this.netherNoiseGen1.generateNoiseOctaves(this.noiseData2, par2, par3, par4, par5, par6, par7, d0, d1, d0);
 		this.noiseData3 = this.netherNoiseGen2.generateNoiseOctaves(this.noiseData3, par2, par3, par4, par5, par6, par7, d0, d1, d0);
 		int k1 = 0;
@@ -431,8 +421,7 @@ public class ChunkProviderModded implements IChunkProvider{
 		int k1;
 		int l1;
 
-		boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, hellRNG, par2, par3, false,
-				net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA);
+		boolean doGen = TerrainGen.populate(par1IChunkProvider, worldObj, hellRNG, par2, par3, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.NETHER_LAVA);
 		for (i1 = 0; doGen && i1 < 8; ++i1) {
 			j1 = k + this.hellRNG.nextInt(16) + 8;
 			k1 = this.hellRNG.nextInt(120) + 4;
@@ -443,8 +432,7 @@ public class ChunkProviderModded implements IChunkProvider{
 		i1 = this.hellRNG.nextInt(this.hellRNG.nextInt(10) + 1) + 1;
 		int i2;
 
-		doGen = TerrainGen.populate(par1IChunkProvider, worldObj, hellRNG, par2, par3, false,
-				net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.FIRE);
+		doGen = TerrainGen.populate(par1IChunkProvider, worldObj, hellRNG, par2, par3, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.FIRE);
 		for (j1 = 0; doGen && j1 < i1; ++j1) {
 			k1 = k + this.hellRNG.nextInt(16) + 8;
 			l1 = this.hellRNG.nextInt(120) + 4;
@@ -454,8 +442,7 @@ public class ChunkProviderModded implements IChunkProvider{
 
 		i1 = this.hellRNG.nextInt(this.hellRNG.nextInt(10) + 1);
 
-		doGen = TerrainGen.populate(par1IChunkProvider, worldObj, hellRNG, par2, par3, false,
-				net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.GLOWSTONE);
+		doGen = TerrainGen.populate(par1IChunkProvider, worldObj, hellRNG, par2, par3, false, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.GLOWSTONE);
 		for (j1 = 0; doGen && j1 < i1; ++j1) {
 			k1 = k + this.hellRNG.nextInt(16) + 8;
 			l1 = this.hellRNG.nextInt(120) + 4;
@@ -493,8 +480,7 @@ public class ChunkProviderModded implements IChunkProvider{
 		WorldGenMinable worldgenminable = new WorldGenMinable(Blocks.emerald_ore, 13, Blocks.end_stone);
 		int j2;
 
-		doGen = TerrainGen.generateOre(worldObj, hellRNG, worldgenminable, k, l,
-				net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.QUARTZ);
+		doGen = TerrainGen.generateOre(worldObj, hellRNG, worldgenminable, k, l, net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.QUARTZ);
 		for (k1 = 0; doGen && k1 < 16; ++k1) {
 			l1 = k + this.hellRNG.nextInt(16);
 			i2 = this.hellRNG.nextInt(108) + 10;

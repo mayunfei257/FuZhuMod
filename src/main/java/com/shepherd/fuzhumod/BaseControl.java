@@ -22,7 +22,7 @@ import com.shepherd.fuzhumod.item.ItemHunDunCrystal;
 import com.shepherd.fuzhumod.item.ItemHunDunEye;
 import com.shepherd.fuzhumod.item.ItemShengMingCrystal;
 import com.shepherd.fuzhumod.message.ClientToServerMessage;
-import com.shepherd.fuzhumod.world.Test;
+import com.shepherd.fuzhumod.world.WorldProviderMod;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -56,6 +56,7 @@ public class BaseControl {
 	public static Block blockHunDunStone;
 	public static Block blockHunDunStoneStairs;
 	public static Block blockHunDunStoneSlab;
+	public static Block blockHunDunStoneDoubleSlab;
 	//Item
 	public static Item itemHunDunCrystal;
 	public static Item itemHuiMieCrystal;
@@ -76,6 +77,7 @@ public class BaseControl {
 		blockHunDunStone = new BlockHunDunStone();
 		blockHunDunStoneStairs = new BlockStairsBase(blockHunDunStone, 0).setBlockName("blockHunDunStoneStairs");
 		blockHunDunStoneSlab = new BlockSlabBase(blockHunDunStone, 0, false).setBlockName("blockHunDunStoneSlab");
+		blockHunDunStoneDoubleSlab = new BlockSlabBase(blockHunDunStone, 0, true).setBlockName("blockHunDunStoneSlab");
 		//Item
 		itemHunDunCrystal = new ItemHunDunCrystal();
 		itemHuiMieCrystal = new ItemHuiMieCrystal();
@@ -87,7 +89,7 @@ public class BaseControl {
 	//ServerSide
 	public static void register(FMLPreInitializationEvent event){
 		//Dimension
-		DimensionManager.registerProviderType(dimensionID, Test.WorldProviderMod.class, false);
+		DimensionManager.registerProviderType(dimensionID, WorldProviderMod.class, false);
 		DimensionManager.registerDimension(dimensionID, dimensionID);
 		//Block
 		GameRegistry.registerBlock(blockHunDunCrystal, ItemBlockBase.class, blockHunDunCrystal.getUnlocalizedName());
@@ -96,7 +98,8 @@ public class BaseControl {
 		GameRegistry.registerBlock(blockHunDunPortal, ItemBlockBase.class, blockHunDunPortal.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunStone, ItemBlockMetaBase.class, blockHunDunStone.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunStoneStairs, ItemBlockBase.class, blockHunDunStoneStairs.getUnlocalizedName());
-		GameRegistry.registerBlock(blockHunDunStoneSlab, ItemBlockSlabBase.class, blockHunDunStoneSlab.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunStoneSlab, ItemBlockSlabBase.class, blockHunDunStoneSlab.getUnlocalizedName(), blockHunDunStoneSlab, blockHunDunStoneDoubleSlab, false);
+		GameRegistry.registerBlock(blockHunDunStoneDoubleSlab, ItemBlockSlabBase.class, blockHunDunStoneDoubleSlab.getUnlocalizedName() + "_Double", blockHunDunStoneSlab, blockHunDunStoneDoubleSlab, true);
 		//Item
 		GameRegistry.registerItem(itemHunDunCrystal, itemHunDunCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemHuiMieCrystal, itemHuiMieCrystal.getUnlocalizedName());
