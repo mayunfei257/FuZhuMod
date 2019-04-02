@@ -2,7 +2,7 @@ package com.shepherd.fuzhumod.item;
 
 import java.util.List;
 
-import com.shepherd.fuzhumod.block.BlockSlabBase;
+import com.shepherd.fuzhumod.block.BlockBaseSlab;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,10 +12,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockSlabBase extends ItemSlab{
+public class ItemBlockBaseSlab extends ItemSlab{
 	protected final Block block;
 
-	public ItemBlockSlabBase(Block block, BlockSlabBase blockSlab, BlockSlabBase doubleBlockSlab, Boolean isDouble) {
+	public ItemBlockBaseSlab(Block block, BlockBaseSlab blockSlab, BlockBaseSlab doubleBlockSlab, Boolean isDouble) {
 		super(block, blockSlab, doubleBlockSlab, isDouble);
 		this.block = block;
 	}

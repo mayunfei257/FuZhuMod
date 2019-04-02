@@ -1,5 +1,6 @@
 package com.shepherd.fuzhumod.item;
 
+import java.util.HashSet;
 import java.util.List;
 
 import com.shepherd.fuzhumod.BaseControl;
@@ -19,14 +20,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
-public class ItemHunDunEye extends Item {
-	public ItemHunDunEye() {
-		super();
-		setMaxStackSize(1);
-		setMaxDamage(1024);
-		setUnlocalizedName("itemHunDunEye");
-		setTextureName(Config.MODID + ":itemhunduneye");
-		setCreativeTab(BaseControl.fuZhuTab);
+public class ItemToolHunDunEye extends ItemBaseTool {
+	public ItemToolHunDunEye() {
+		super(0, ToolMaterialS.HUNDUN, new HashSet(), ToolType.Bead);
+		setUnlocalizedName("itemToolHunDunEye");
+		setTextureName(Config.MODID + ":itemtoolhunduneye");
 	}
 	
 	@Override
@@ -124,9 +122,8 @@ public class ItemHunDunEye extends Item {
 	@Override
     @SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {
-		list.add("");
-		list.add(I18n.format(Config.MODID + ".itemHunDunEyes.message1", new Object[]{}));
-		list.add(I18n.format(Config.MODID + ".itemHunDunEyes.message2", new Object[]{}));
-		list.add("");
+		super.addInformation(itemStack, entityPlayer, list, showAdvancedInfo);
+		list.add(I18n.format(Config.MODID + ".itemToolHunDunEye.message1", new Object[]{}));
+		list.add(I18n.format(Config.MODID + ".itemToolHunDunEye.message2", new Object[]{}));
 	}
 }

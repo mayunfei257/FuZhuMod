@@ -15,11 +15,11 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class ItemBlockMetaBase extends ItemBlock{
+public class ItemBlockBaseMeta extends ItemBlock{
 	protected final Block block;
 	protected final String[] metaNameStrings;
 	
-	public ItemBlockMetaBase(Block block){
+	public ItemBlockBaseMeta(Block block){
 		super(block);
 		this.block = block;
 		this.setMaxDamage(0);

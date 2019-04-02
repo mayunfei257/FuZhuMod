@@ -6,11 +6,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.creativetab.CreativeTabs;
 
-public class BlockStairsBase extends BlockStairs{
+public class BlockBaseStairs extends BlockStairs{
 	protected final Block baseBlock;
 	protected final int meta;
 
-	public BlockStairsBase(Block block, int meta) {
+	public BlockBaseStairs(Block block, int meta) {
 		super(block, meta);
 		this.baseBlock = block;
 		this.meta = meta;

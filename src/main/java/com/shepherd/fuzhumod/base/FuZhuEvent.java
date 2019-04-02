@@ -79,10 +79,10 @@ public class FuZhuEvent {
 	@SubscribeEvent
 	public void livingHurtEvent(LivingHurtEvent event) {
 		DamageSource source = event.source;
-		if(source instanceof EntityDamageSource && ((EntityDamageSource)source).getEntity() instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer)(((EntityDamageSource)source).getEntity());
-			if (!player.worldObj.isRemote && null != player.getHeldItem() && player.getHeldItem().hasTagCompound()) {
-				NBTTagCompound stackTagCompound = player.getHeldItem().getTagCompound();
+		if(null != source && source instanceof EntityDamageSource && ((EntityDamageSource)source).getEntity() instanceof EntityLivingBase) {
+			EntityLivingBase entityLivingBase = (EntityLivingBase)(((EntityDamageSource)source).getEntity());
+			if (!entityLivingBase.worldObj.isRemote && null != entityLivingBase.getHeldItem() && entityLivingBase.getHeldItem().hasTagCompound()) {
+				NBTTagCompound stackTagCompound = entityLivingBase.getHeldItem().getTagCompound();
 				String type = stackTagCompound.getString(Config.NBTTAG_TYPE);
 				float strength = stackTagCompound.getFloat(Config.NBTTAG_STRENGTH);
 				if(Config.NBTTAG_TYPE_ATTACK.equals(type)) {
@@ -92,10 +92,11 @@ public class FuZhuEvent {
 		}
 		//
 		EntityLivingBase entity = event.entityLiving;
-		if (!entity.worldObj.isRemote && event.ammount > 0 && entity instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer)entity;
+		if (null != entity && !entity.worldObj.isRemote && event.ammount > 0 && entity instanceof EntityLivingBase) {
+			EntityLivingBase entityLivingBase = (EntityLivingBase)entity;
 			float totalStrength = 0F;
-			for(ItemStack itemStack: player.inventory.armorInventory) {
+			for(int index = 1; index <= 4; index++) {
+				ItemStack itemStack = entityLivingBase.getEquipmentInSlot(index);
 				if(null != itemStack && itemStack.stackSize > 0 && itemStack.hasTagCompound()) {
 					NBTTagCompound stackTagCompound = itemStack.getTagCompound();
 					String type = stackTagCompound.getString(Config.NBTTAG_TYPE);
@@ -107,7 +108,9 @@ public class FuZhuEvent {
 			if(totalStrength > 0) {
 				float reduce = Math.min(totalStrength, event.ammount);
 				event.ammount = event.ammount - reduce;
-				player.addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".livingHurtEvent.ammount", new Object[] {new DecimalFormat("#0.0").format(reduce)})));
+				if(entityLivingBase instanceof EntityPlayer) {
+					((EntityPlayer)entityLivingBase).addChatMessage(new ChatComponentText(I18n.format(Config.MODID + ".livingHurtEvent.ammount", new Object[] {new DecimalFormat("#0.0").format(reduce)})));
+				}
 			}
 		}
 	}

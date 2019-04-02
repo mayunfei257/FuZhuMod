@@ -18,11 +18,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class BlockSlabBase extends BlockSlab{
+public class BlockBaseSlab extends BlockSlab{
 	protected final Block baseBlock;
 	protected final int meta;
 
-	public BlockSlabBase(Block block, int meta, boolean isDouble) {
+	public BlockBaseSlab(Block block, int meta, boolean isDouble) {
 		super(isDouble, block.getMaterial());
 		this.baseBlock = block;
 		this.meta = meta;

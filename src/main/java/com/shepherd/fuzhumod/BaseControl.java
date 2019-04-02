@@ -5,22 +5,23 @@ import com.shepherd.fuzhumod.base.FuZhuEvent;
 import com.shepherd.fuzhumod.base.FuZhuGuiHandler;
 import com.shepherd.fuzhumod.base.FuZhuTab;
 import com.shepherd.fuzhumod.base.FuZhuWorldGenerator;
+import com.shepherd.fuzhumod.block.BlockBaseSlab;
+import com.shepherd.fuzhumod.block.BlockBaseStairs;
 import com.shepherd.fuzhumod.block.BlockHunDunCao;
 import com.shepherd.fuzhumod.block.BlockHunDunCrystal;
 import com.shepherd.fuzhumod.block.BlockHunDunPortal;
 import com.shepherd.fuzhumod.block.BlockHunDunStone;
 import com.shepherd.fuzhumod.block.BlockHunDunTable;
-import com.shepherd.fuzhumod.block.BlockSlabBase;
-import com.shepherd.fuzhumod.block.BlockStairsBase;
 import com.shepherd.fuzhumod.entity.TileEntityHunDunTable;
 import com.shepherd.fuzhumod.item.ItemBlockBase;
-import com.shepherd.fuzhumod.item.ItemBlockMetaBase;
-import com.shepherd.fuzhumod.item.ItemBlockSlabBase;
+import com.shepherd.fuzhumod.item.ItemBlockBaseMeta;
+import com.shepherd.fuzhumod.item.ItemBlockBaseSlab;
 import com.shepherd.fuzhumod.item.ItemFuZhiCrystal;
 import com.shepherd.fuzhumod.item.ItemHuiMieCrystal;
 import com.shepherd.fuzhumod.item.ItemHunDunCrystal;
-import com.shepherd.fuzhumod.item.ItemHunDunEye;
+import com.shepherd.fuzhumod.item.ItemToolHunDunEye;
 import com.shepherd.fuzhumod.item.ItemShengMingCrystal;
+import com.shepherd.fuzhumod.item.ItemToolHunDunSickle;
 import com.shepherd.fuzhumod.message.ClientToServerMessage;
 import com.shepherd.fuzhumod.world.WorldProviderMod;
 
@@ -62,7 +63,8 @@ public class BaseControl {
 	public static Item itemHuiMieCrystal;
 	public static Item itemShengMingCrystal;
 	public static Item itemFuZhiCrystal;
-	public static Item itemHunDunEye;
+	public static Item itemToolHunDunEye;
+	public static Item itemToolHunDunSickle;
 	//FakePlayer
 	
 	//ServerSide
@@ -75,15 +77,16 @@ public class BaseControl {
 		blockHunDunCao = new BlockHunDunCao();
 		blockHunDunPortal = new BlockHunDunPortal();
 		blockHunDunStone = new BlockHunDunStone();
-		blockHunDunStoneStairs = new BlockStairsBase(blockHunDunStone, 0).setBlockName("blockHunDunStoneStairs");
-		blockHunDunStoneSlab = new BlockSlabBase(blockHunDunStone, 0, false).setBlockName("blockHunDunStoneSlab");
-		blockHunDunStoneDoubleSlab = new BlockSlabBase(blockHunDunStone, 0, true).setBlockName("blockHunDunStoneSlab");
+		blockHunDunStoneStairs = new BlockBaseStairs(blockHunDunStone, 0).setBlockName("blockHunDunStoneStairs");
+		blockHunDunStoneSlab = new BlockBaseSlab(blockHunDunStone, 0, false).setBlockName("blockHunDunStoneSlab");
+		blockHunDunStoneDoubleSlab = new BlockBaseSlab(blockHunDunStone, 0, true).setBlockName("blockHunDunStoneSlab");
 		//Item
 		itemHunDunCrystal = new ItemHunDunCrystal();
 		itemHuiMieCrystal = new ItemHuiMieCrystal();
 		itemShengMingCrystal = new ItemShengMingCrystal();
 		itemFuZhiCrystal = new ItemFuZhiCrystal();
-		itemHunDunEye = new ItemHunDunEye();
+		itemToolHunDunEye = new ItemToolHunDunEye();
+		itemToolHunDunSickle = new ItemToolHunDunSickle();
 	}
 	
 	//ServerSide
@@ -96,16 +99,17 @@ public class BaseControl {
 		GameRegistry.registerBlock(blockHunDunTable, ItemBlockBase.class, blockHunDunTable.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunCao, ItemBlockBase.class, blockHunDunCao.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunPortal, ItemBlockBase.class, blockHunDunPortal.getUnlocalizedName());
-		GameRegistry.registerBlock(blockHunDunStone, ItemBlockMetaBase.class, blockHunDunStone.getUnlocalizedName());
+		GameRegistry.registerBlock(blockHunDunStone, ItemBlockBaseMeta.class, blockHunDunStone.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunStoneStairs, ItemBlockBase.class, blockHunDunStoneStairs.getUnlocalizedName());
-		GameRegistry.registerBlock(blockHunDunStoneSlab, ItemBlockSlabBase.class, blockHunDunStoneSlab.getUnlocalizedName(), blockHunDunStoneSlab, blockHunDunStoneDoubleSlab, false);
-		GameRegistry.registerBlock(blockHunDunStoneDoubleSlab, ItemBlockSlabBase.class, blockHunDunStoneDoubleSlab.getUnlocalizedName() + "_Double", blockHunDunStoneSlab, blockHunDunStoneDoubleSlab, true);
+		GameRegistry.registerBlock(blockHunDunStoneSlab, ItemBlockBaseSlab.class, blockHunDunStoneSlab.getUnlocalizedName(), blockHunDunStoneSlab, blockHunDunStoneDoubleSlab, false);
+//		GameRegistry.registerBlock(blockHunDunStoneDoubleSlab, ItemBlockSlabBase.class, blockHunDunStoneDoubleSlab.getUnlocalizedName() + "_Double", blockHunDunStoneSlab, blockHunDunStoneDoubleSlab, true);
 		//Item
 		GameRegistry.registerItem(itemHunDunCrystal, itemHunDunCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemHuiMieCrystal, itemHuiMieCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemShengMingCrystal, itemShengMingCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemFuZhiCrystal, itemFuZhiCrystal.getUnlocalizedName());
-		GameRegistry.registerItem(itemHunDunEye, itemHunDunEye.getUnlocalizedName());
+		GameRegistry.registerItem(itemToolHunDunEye, itemToolHunDunEye.getUnlocalizedName());
+		GameRegistry.registerItem(itemToolHunDunSickle, itemToolHunDunSickle.getUnlocalizedName());
 		//Entity
 //		EntityRegistry.registerModEntity(new ResourceLocation(Config.MODID + ":entitysupersnowman"), EntitySuperSnowman.class, "entitySuperSnowman", 263, ZijingMod.instance,64, 1, true, (204 << 16) + (0 << 8) + 204, (255 << 16) + (102 << 8) + 255);
 		//Message
@@ -125,8 +129,13 @@ public class BaseControl {
 	public static void registerRecipe(FMLInitializationEvent event){
 		//Recipe and Smelting
 		GameRegistry.addShapelessRecipe(new ItemStack(itemHunDunCrystal, 9), blockHunDunCrystal);
-		addRecipe(new ItemStack(blockHunDunCrystal, 1), itemHunDunCrystal, itemHunDunCrystal, itemHunDunCrystal, itemHunDunCrystal, itemHunDunCrystal, itemHunDunCrystal, itemHunDunCrystal, itemHunDunCrystal, itemHunDunCrystal);
-		addRecipe(new ItemStack(blockHunDunTable, 1), itemHunDunCrystal, itemHunDunCrystal, itemHunDunCrystal, Blocks.obsidian, Blocks.crafting_table, Blocks.obsidian, Blocks.obsidian, blockHunDunCrystal, Blocks.obsidian);
+		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunCrystal, 1), "AAA", "AAA", "AAA", 'A', itemHunDunCrystal);
+		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunTable, 1), "AAA", "BCB", "BDB", 'A', itemHunDunCrystal, 'B', Blocks.obsidian, 'C', Blocks.crafting_table, 'D',  blockHunDunCrystal);
+		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunTable, 1), "AAA", "BCB", "BDB", 'A', itemHunDunCrystal, 'B', Blocks.obsidian, 'C', Blocks.crafting_table, 'D',  blockHunDunCrystal);
+		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunStone, 1, 1), "A", "A", 'A', new ItemStack(blockHunDunStoneSlab, 1));
+		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunStone, 4, 2), "AA", "AA", 'A', new ItemStack(blockHunDunStone, 1, 0));
+		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunStoneStairs, 6), "A##", "AA#", "AAA", 'A', new ItemStack(blockHunDunStone, 1, 0));
+		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunStoneSlab, 6), "AAA", 'A', new ItemStack(blockHunDunStone, 1, 0));
 
 //		GameRegistry.addShapelessRecipe(new ItemStack(Items.gunpowder, 3), new ItemStack(Items.flint, 1), new ItemStack(Items.dye, 1, 15), new ItemStack(Items.coal, 1));
 //		GameRegistry.addShapelessRecipe(new ItemStack(Items.gunpowder, 3), new ItemStack(Items.flint, 1), new ItemStack(Items.dye, 1, 15),new ItemStack(Items.coal, 1, 1));
@@ -154,19 +163,5 @@ public class BaseControl {
 	
 	public static void tileEntityAddMapping(FMLPostInitializationEvent event) {
 		TileEntity.addMapping(TileEntityHunDunTable.class, Config.MODID + ":tileEntityFuzhiTable");
-	}
-
-	//*****************************************************************************************************************************************************//
-	
-	//Orderly synthesis method
-	private static void addRecipe(ItemStack itemStack, Object item1,Object item2,Object item3,Object item4,Object item5,Object item6,Object item7,Object item8,Object item9){
-		Object[] object = new Object[]{"012", "345", "678",
-			Character.valueOf('0'), item1, Character.valueOf('1'), item2,
-			Character.valueOf('2'), item3, Character.valueOf('3'), item4,
-			Character.valueOf('4'), item5, Character.valueOf('5'), item6,
-			Character.valueOf('6'), item7, Character.valueOf('7'), item8,
-			Character.valueOf('8'), item9
-		};
-		GameRegistry.addShapedRecipe(itemStack, object);
 	}
 }
