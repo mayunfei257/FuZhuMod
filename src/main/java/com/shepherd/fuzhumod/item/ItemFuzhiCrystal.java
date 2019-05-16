@@ -13,9 +13,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemFuZhiiCrystal extends Item implements CrystalItemType{
+public class ItemFuZhiCrystal extends Item implements CrystalItemType{
 
-	public ItemFuZhiiCrystal() {
+	public ItemFuZhiCrystal() {
 		super();
 		setMaxStackSize(64);
 		setUnlocalizedName("itemFuZhiCrystal");
