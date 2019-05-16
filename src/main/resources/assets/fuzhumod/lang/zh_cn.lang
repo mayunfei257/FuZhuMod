@@ -1,11 +1,12 @@
 ﻿#FuzhuMod-----------------------------------------------------------------
 #0黑色,1深蓝色,2深绿色,3湖蓝色,4深红色,5紫色,6金色,7灰色,8深灰色,9蓝色,a绿色,b天蓝色,c红色,d粉红色,e黄色,f白色,r重置
-#f凡品, 9下级物品, 5高级物品, 6神器物品名, 1物品属性, 7物品说明, c消息：错误, b消息：提示
+#f凡品, 9下级物品, 5高级物品, 6神器物品名, 1物品属性技能, 7物品说明, c消息：错误, b消息：提示
 itemGroup.fuZhuTab=辅助MOD
 
 #Block----------------------------------------------------------------------
+tile.blockHunDunPyknoticCrystal.name=§5致密的混沌晶石块
 tile.blockHunDunCrystal.name=§5混沌晶石块
-tile.blockHunDunTable.name=§5混沌台
+tile.blockHunDunTable.name=§5混沌工作台
 tile.blockHunDunCao.name=§5混沌草
 tile.blockHunDunPortal.name=§5混沌之门
 tile.blockHunDunStone.name=§9混沌石
@@ -21,13 +22,15 @@ item.itemHuiMieCrystal.name=§5毁灭晶石
 item.itemShengMingCrystal.name=§5生命晶石
 item.itemFuZhiCrystal.name=§5复制晶石
 item.itemToolHunDunEye.name=§6混沌古器-混沌之眼
-item.itemToolHunDunSickle.name=§6混沌古器-混沌之镰
+item.itemToolShougeSickle.name=§6混沌古器-收割之镰
 
 #BlockInfor----------------------------------------------------------------
+fuzhumod.blockHunDunPyknoticCrystal.message1=§1万物之初，世界之始
+fuzhumod.blockHunDunPyknoticCrystal.message2=§7由混沌晶石块合成的致密的混沌晶石块，特别坚硬
 fuzhumod.blockHunDunCrystal.message1=§1万物之初，世界之始
 fuzhumod.blockHunDunCrystal.message2=§7由混沌晶石合成的大混沌晶石块，特别坚硬
-fuzhumod.blockHunDunTable.message1=§7可以承受极大能量的混沌台，可用于
-fuzhumod.blockHunDunTable.message2=§7分解混沌晶石，强化物品，复制物品等
+fuzhumod.blockHunDunTable.message1=§7可以承受极大能量的混沌工作台，可用于
+fuzhumod.blockHunDunTable.message2=§7分解混沌晶石，强化物品，复制物品等。
 fuzhumod.blockHunDunCao.message1=§7从无尽虚空中抽取混沌能量的混沌草，可提炼出混沌晶石
 fuzhumod.blockHunDunPortal.message1=§7混沌世界的传送门
 fuzhumod.blockHunDunStone.default.message1=§7普通的混沌石块
@@ -45,10 +48,17 @@ fuzhumod.itemFuZhiCrystal.message1=§1容天纳地，幻化万千
 fuzhumod.itemFuZhiCrystal.message2=§7复制任何物品的晶石，可在混沌台分解混沌晶石而获得
 
 fuzhumod.itemBaseTool.attack=§5攻击力 +%d
-fuzhumod.itemToolHunDunEye.message1=§1上天入地，无所不能
-fuzhumod.itemToolHunDunEye.message2=§7打开混沌界的钥匙，且拥有着上天入地操控乾坤之神力
-fuzhumod.itemToolHunDunSickle.message1=§1主宰生死，收割万物
-fuzhumod.itemToolHunDunSickle.message2=§7主宰世间轮回生死
+fuzhumod.itemToolHunDunEye.skill1=§1技能1：临时生命值  操作：右键
+fuzhumod.itemToolHunDunEye.skill2=§1技能2：清除所有药水效果  操作：下蹲+右键
+fuzhumod.itemToolHunDunEye.skill3=§1技能3：向上传送  操作：目标方块+右键
+fuzhumod.itemToolHunDunEye.skill4=§1技能4：向下传送  操作：目标方块+下蹲+右键
+fuzhumod.itemToolHunDunEye.skill5=§1技能5：免疫跌落伤害  操作：拿在手里（被动技能）
+fuzhumod.itemToolHunDunEye.message1=§7上天入地，遨游乾坤，旅行居家必备！
+fuzhumod.itemToolHunDunEye.message2=§7混沌古器之一，拥有强大的能量，能给使用者提
+fuzhumod.itemToolHunDunEye.message3=§7供生存保障，且能穿越除基岩以外的任何障碍！
+
+fuzhumod.itemToolShougeSickle.message1=§1主宰生死，收割万物
+fuzhumod.itemToolShougeSickle.message2=§7主宰世间轮回生死
 
 fuzhumod.tooltipEvent.attack1=§5强化等级: %d级
 fuzhumod.tooltipEvent.attack2=§5伤害增加: +%s

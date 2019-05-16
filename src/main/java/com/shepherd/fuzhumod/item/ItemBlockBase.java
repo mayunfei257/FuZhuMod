@@ -35,7 +35,11 @@ public class ItemBlockBase extends ItemBlock{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {
-		if(block == BaseControl.blockHunDunCrystal) {
+		if(block == BaseControl.blockHunDunPyknoticCrystal) {
+			list.add(I18n.format(Config.MODID + ".blockHunDunPyknoticCrystal.message1", new Object[]{}));
+			list.add(I18n.format(Config.MODID + ".blockHunDunPyknoticCrystal.message2", new Object[]{}));
+			list.add("");
+		}else if(block == BaseControl.blockHunDunCrystal) {
 			list.add(I18n.format(Config.MODID + ".blockHunDunCrystal.message1", new Object[]{}));
 			list.add(I18n.format(Config.MODID + ".blockHunDunCrystal.message2", new Object[]{}));
 			list.add("");

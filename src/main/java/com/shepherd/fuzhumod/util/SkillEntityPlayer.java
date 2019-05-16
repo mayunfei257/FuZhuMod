@@ -1,5 +1,7 @@
 package com.shepherd.fuzhumod.util;
 
+import com.shepherd.fuzhumod.FuZhuMod;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,7 +9,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class SkillEntityPlayer extends SkillEntity{
-
+	
+	protected static final int LevitationLevel = 0;
+	protected static final int LevitationDuration = 80;
+	protected static final int HealthBoostLevel = 0;
+	protected static final int HealthBoostDuration = 320;
+	
+	
+	
 //	public static EntityArrowBingDan shootBingDanSkill(EntityPlayer player) {
 //		EntityArrowBingDan entityDan = null;
 //		ShepherdCapability shepherdCapability = ShepherdProvider.getCapabilityFromPlayer(player);
@@ -88,9 +97,11 @@ public class SkillEntityPlayer extends SkillEntity{
 //	}
 
 	public static void levitationSkill(EntityPlayer player) {
-        addEffect(player, 25, 80, 0);
+        addEffect(player, 25, LevitationDuration, LevitationLevel);
 	}
-
+	public static void healthBoostSkill(EntityPlayer player) {
+        addEffect(player, 21, HealthBoostDuration, HealthBoostLevel);
+	}
 	public static void removeEffectSkill(EntityPlayer player) {
     	removeEffect(player);
 	}
@@ -186,10 +197,17 @@ public class SkillEntityPlayer extends SkillEntity{
 //		}
 //    }
 	
-//	public static void chainDropSkill(ItemStack toolStack, World world, IBlockState blockState, BlockPos pos, EntityPlayer player) {
-//		int damage = toolStack.getMaxDamage() - toolStack.getItemDamage();
-//		int maxAmount = damage > ZijingMod.config.getTOOL_DMAMOUNT()/2 ? ZijingMod.config.getTOOL_DMAMOUNT() : damage * 2;
-//		int amount = chainDrop(toolStack, world, blockState, pos, maxAmount);
-//		toolStack.damageItem(amount/2 >= 1 ? amount/2 : 1, player);
-//	}
+	public static void chainDropBlockSkill(ItemStack toolStack, World world, int x, int y, int z, EntityPlayer player) {
+		int damage = toolStack.getMaxDamage() - toolStack.getItemDamage();
+		int maxAmount = damage > FuZhuMod.config.getChain_Drop_Amount()/2 ? FuZhuMod.config.getChain_Drop_Amount() : damage * 2;
+		int amount = chainDropBlock(toolStack, world, x, y, z, maxAmount);
+		toolStack.damageItem(amount/2 >= 1 ? amount/2 : 1, player);
+	}
+	
+	public static void chainDropPlantBlockSkill(ItemStack toolStack, World world, int x, int y, int z, EntityPlayer player) {
+		int damage = toolStack.getMaxDamage() - toolStack.getItemDamage();
+		int maxAmount = damage > FuZhuMod.config.getChain_Drop_Amount()/2 ? FuZhuMod.config.getChain_Drop_Amount() : damage * 2;
+		int amount = chainDropPlantBlock(toolStack, world, x, y, z, maxAmount);
+		toolStack.damageItem(amount/2 >= 1 ? amount/2 : 1, player);
+	}
 }

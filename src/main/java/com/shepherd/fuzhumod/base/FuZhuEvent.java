@@ -5,6 +5,8 @@ import java.lang.reflect.Modifier;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import com.shepherd.fuzhumod.BaseControl;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
@@ -17,6 +19,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -42,7 +45,17 @@ public class FuZhuEvent {
 			}
 		}
 	}
-
+	
+	@SubscribeEvent
+	public void entityFall(LivingFallEvent event) {
+		if (null != event.entityLiving && !event.entityLiving.worldObj.isRemote) {
+			ItemStack heldItemStack = event.entityLiving.getHeldItem();
+			if(event.distance > 3 && null != heldItemStack && heldItemStack.getItem() == BaseControl.itemToolHunDunEye) {
+				event.distance = 0;
+			}
+		}
+	}
+	
 //	@SubscribeEvent
 //	public void livingAttackEvent(LivingAttackEvent event) {
 //		DamageSource source = event.source;
@@ -83,10 +96,8 @@ public class FuZhuEvent {
 			EntityLivingBase entityLivingBase = (EntityLivingBase)(((EntityDamageSource)source).getEntity());
 			if (!entityLivingBase.worldObj.isRemote && null != entityLivingBase.getHeldItem() && entityLivingBase.getHeldItem().hasTagCompound()) {
 				NBTTagCompound stackTagCompound = entityLivingBase.getHeldItem().getTagCompound();
-				String type = stackTagCompound.getString(Config.NBTTAG_TYPE);
-				float strength = stackTagCompound.getFloat(Config.NBTTAG_STRENGTH);
-				if(Config.NBTTAG_TYPE_ATTACK.equals(type)) {
-					event.ammount += strength;
+				if(Config.NBTTAG_TYPE_ATTACK.equals(stackTagCompound.getString(Config.NBTTAG_TYPE))) {
+					event.ammount += stackTagCompound.getFloat(Config.NBTTAG_STRENGTH);
 				}
 			}
 		}
@@ -99,8 +110,7 @@ public class FuZhuEvent {
 				ItemStack itemStack = entityLivingBase.getEquipmentInSlot(index);
 				if(null != itemStack && itemStack.stackSize > 0 && itemStack.hasTagCompound()) {
 					NBTTagCompound stackTagCompound = itemStack.getTagCompound();
-					String type = stackTagCompound.getString(Config.NBTTAG_TYPE);
-					if(Config.NBTTAG_TYPE_DEFENSE.equals(type)) {
+					if(Config.NBTTAG_TYPE_DEFENSE.equals(stackTagCompound.getString(Config.NBTTAG_TYPE))) {
 						totalStrength += stackTagCompound.getFloat(Config.NBTTAG_STRENGTH);
 					}
 				}

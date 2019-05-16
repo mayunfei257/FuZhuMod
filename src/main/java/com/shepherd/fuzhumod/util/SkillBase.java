@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.shepherd.fuzhumod.BaseControl;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -20,11 +21,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 
 public class SkillBase {
 	protected static final int WORLD_MAX_HIGHT = 512;
-	protected static final float VELOCITY = 2.5F;
-	protected static final float INACCURACY = 0.0F;
 
 	//TODO ------Base Skill Start--------------------
 //	protected static EntityArrowBingDan shootBingDanBase(EntityLivingBase thrower, double throwerX, double throwerY, double throwerZ, double vecX, double vecY, double vecZ, float attackDamage, float slownessProbability, int slownessStrength, boolean checkFaction) {
@@ -66,6 +66,7 @@ public class SkillBase {
 
 	protected static void addEffectBase(EntityLivingBase entityLivingBase, int potionID, int duration, int amplifier) {
 		entityLivingBase.addPotionEffect(new PotionEffect(potionID, duration, amplifier, false));
+		entityLivingBase.worldObj.playSound(entityLivingBase.posX, entityLivingBase.posY + entityLivingBase.getEyeHeight(), entityLivingBase.posZ, "entity.endermen.teleport", 1.0F, 1.0F, false);
 	}
 	protected static void addEffectBase(List<EntityLivingBase> entityLivingBaseList, int potionID, int duration, int amplifier) {
 		for(EntityLivingBase entityLivingBase: entityLivingBaseList) {
@@ -78,6 +79,7 @@ public class SkillBase {
 			for(PotionEffect potionEffect: potionEffects) {
 				entityLivingBase.removePotionEffect(potionEffect.getPotionID());
 			}
+			entityLivingBase.worldObj.playSound(entityLivingBase.posX, entityLivingBase.posY + entityLivingBase.getEyeHeight(), entityLivingBase.posZ, "entity.endermen.teleport", 1.0F, 1.0F, false);
 		}
 	}
 	protected static void removeEffectBase(List<EntityLivingBase> entityLivingBaseList) {
@@ -334,30 +336,54 @@ public class SkillBase {
 //    	return entity;
 //    }
 	
-//	protected static int chainDropBlockBase(World world, IBlockState blockState, BlockPos pos, int amount, int maxAmount) {
-//		for(int y = 1; y >= -1; y--) {
-//			for(int x = 1; x >= -1; x--) {
-//				for(int z = 1; z >= -1; z--) {
-//					if(amount >= maxAmount) { return amount; }
-//					BlockPos thisPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-//					IBlockState thisState = world.getBlockState(thisPos);
-//					if((x == 0 && y == 0 && z == 0) || thisState.getBlock() == Blocks.AIR) {
-//						continue;
-//					}else if(isSameBlock(thisState, blockState)) {
-//						thisState.getBlock().dropBlockAsItem(world, thisPos, world.getBlockState(thisPos), 1);
-//						world.setBlockToAir(thisPos);
-//						amount = chainDropBlockBase(world, blockState, thisPos, ++amount, maxAmount);
-//					}
-//				}
-//			}
-//		}
-//		return amount;
-//	}
+	protected static int chainDropBlockBase(World world, BlockPos pos, int amount, int maxAmount) {
+		for(int y = 1; y >= -1; y--) {
+			for(int x = 1; x >= -1; x--) {
+				for(int z = 1; z >= -1; z--) {
+					if(amount >= maxAmount) { return amount; }
+					Block block = world.getBlock(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+					if((x == 0 && y == 0 && z == 0) || block == Blocks.air) {
+						continue;
+					}else {
+						int meta = world.getBlockMetadata(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
+						BlockPos thisPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z, world, block, meta);
+						if(isSameBlock(thisPos, pos)) {
+							block.dropBlockAsItem(world, thisPos.getX(), thisPos.getY(), thisPos.getZ(), meta, 1);
+							world.setBlockToAir(thisPos.getX(), thisPos.getY(), thisPos.getZ());
+							amount = chainDropBlockBase(world, thisPos, ++amount, maxAmount);
+						}
+					}
+				}
+			}
+		}
+		return amount;
+	}
+	
+	protected static int chainDropBlockBySameYBase(World world, BlockPos pos, int amount, int maxAmount) {
+		for(int x = 1; x >= -1; x--) {
+			for(int z = 1; z >= -1; z--) {
+				if(amount >= maxAmount) { return amount; }
+				Block block = world.getBlock(pos.getX() + x, pos.getY(), pos.getZ() + z);
+				if((x == 0 && z == 0) || block == Blocks.air) {
+					continue;
+				}else {
+					int meta = world.getBlockMetadata(pos.getX() + x, pos.getY(), pos.getZ() + z);
+					BlockPos thisPos = new BlockPos(pos.getX() + x, pos.getY(), pos.getZ() + z, world, block, meta);
+					if(isSameBlock(thisPos, pos)) {
+						block.dropBlockAsItem(world, thisPos.getX(), thisPos.getY(), thisPos.getZ(), meta, 1);
+						world.setBlockToAir(thisPos.getX(), thisPos.getY(), thisPos.getZ());
+						amount = chainDropBlockBase(world, thisPos, ++amount, maxAmount);
+					}
+				}
+			}
+		}
+		return amount;
+	}
 	//------Base Skill End--------------------
 	
 
 	//TODO------Base Skill Util--------------------
-    private static boolean utilCanStand(World world,int x, int y, int z, boolean canWater, boolean canPortal) {
+    private static boolean utilCanStand(World world, int x, int y, int z, boolean canWater, boolean canPortal) {
 		if((world.getBlock(x, y, z) == Blocks.air
 				|| world.getBlock(x, y, z) == Blocks.portal
 				|| world.getBlock(x, y, z) == Blocks.water
@@ -372,24 +398,28 @@ public class SkillBase {
 		return false;
 	}
     
-//    private static boolean isSameBlock(IBlockState thisBlockState, IBlockState baseBlockState) {
-//    	if(baseBlockState.getBlock() == thisBlockState.getBlock() && baseBlockState.getBlock().getMetaFromState(baseBlockState) == thisBlockState.getBlock().getMetaFromState(thisBlockState)) {
-//    		return true;
-//		}else if((Blocks.LIT_REDSTONE_ORE == baseBlockState.getBlock() || Blocks.REDSTONE_ORE == baseBlockState.getBlock()) && (Blocks.LIT_REDSTONE_ORE == thisBlockState.getBlock() || Blocks.REDSTONE_ORE == thisBlockState.getBlock())) {
-//			return true;
-//		}else if(Blocks.LOG == baseBlockState.getBlock() && Blocks.LOG == thisBlockState.getBlock()) {
-//			int baseMeta = baseBlockState.getBlock().getMetaFromState(baseBlockState);
-//			int thisMeta = thisBlockState.getBlock().getMetaFromState(thisBlockState);
-//			BlockPlanks.EnumType baseBlockPlanksType = BlockPlanks.EnumType.byMetadata((baseMeta & 3) % 4);
-//			BlockPlanks.EnumType thisBlockPlanksType = BlockPlanks.EnumType.byMetadata((thisMeta & 3) % 4);
-//			return baseBlockPlanksType == thisBlockPlanksType;
-//		}else if(Blocks.LOG2 == baseBlockState.getBlock() && Blocks.LOG2 == thisBlockState.getBlock()) {
-//			int baseMeta = baseBlockState.getBlock().getMetaFromState(baseBlockState);
-//			int thisMeta = thisBlockState.getBlock().getMetaFromState(thisBlockState);
-//			BlockPlanks.EnumType baseBlockPlanksType = BlockPlanks.EnumType.byMetadata((baseMeta & 3) + 4);
-//			BlockPlanks.EnumType thisBlockPlanksType = BlockPlanks.EnumType.byMetadata((thisMeta & 3) + 4);
-//			return baseBlockPlanksType == thisBlockPlanksType;
-//		}
-//    	return false;
-//    }
+    private static boolean isSameBlock(BlockPos thisBlockPos, BlockPos baseBlockPos) {
+    	if(baseBlockPos.getBlock() == thisBlockPos.getBlock() && baseBlockPos.getMeta() == thisBlockPos.getMeta()) {
+    		return true;
+		}else if(BaseControl.blockHunDunCao == baseBlockPos.getBlock() && BaseControl.blockHunDunCao == thisBlockPos.getBlock()) {
+			return true;
+		}else if(Blocks.pumpkin == baseBlockPos.getBlock() && Blocks.pumpkin == thisBlockPos.getBlock()) {
+			return true;
+		}else if((Blocks.lit_redstone_ore == baseBlockPos.getBlock() || Blocks.redstone_ore == baseBlockPos.getBlock()) && (Blocks.lit_redstone_ore == thisBlockPos.getBlock() || Blocks.redstone_ore == thisBlockPos.getBlock())) {
+			return true;
+		}else if(Blocks.log == baseBlockPos.getBlock() && Blocks.log == thisBlockPos.getBlock()) {
+			int baseMeta = baseBlockPos.getMeta();
+			int thisMeta = thisBlockPos.getMeta();
+			int baseBlockPlanksType = (baseMeta & 3) % 4;
+			int thisBlockPlanksType = (thisMeta & 3) % 4;
+			return baseBlockPlanksType == thisBlockPlanksType;
+		}else if(Blocks.log2 == baseBlockPos.getBlock() && Blocks.log2 == thisBlockPos.getBlock()) {
+			int baseMeta = baseBlockPos.getMeta();
+			int thisMeta = thisBlockPos.getMeta();
+			int baseBlockPlanksType = (baseMeta & 3) % 4;
+			int thisBlockPlanksType = (thisMeta & 3) % 4;
+			return baseBlockPlanksType == thisBlockPlanksType;
+		}
+    	return false;
+    }
 }

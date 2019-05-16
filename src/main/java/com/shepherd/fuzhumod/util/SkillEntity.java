@@ -3,6 +3,9 @@ package com.shepherd.fuzhumod.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.shepherd.fuzhumod.item.ItemBaseTool;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemAxe;
@@ -16,40 +19,40 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
 public class SkillEntity extends SkillBase{
-	protected static final int DAN_GROUP_LAUNCH_HEIGHT = 32;
-	protected static final int DAN_GROUP_FREQUENCY_TICK = 5;
-	
-	public static final float EXPLOSION_PROBABILITY_K = 0.01F;
-	public static final float EXPLOSION_STRENGTH_K = 0.05F;
-	public static final float SLOWNESS_PROBABILITY_K = 0.02F;
-	public static final float SLOWNESS_STRENGTH_K = 0.1F;
-	public static final float ThousandsFrozen_Range_K = 0.25F;
-	public static final float Firestorm_Range_K = 0.25F;
-	
-	public static final int CAN_SHOOT_HUODAN_LEVEL = 15;
-	public static final int IMMUNE_FIRE_LEVEL = 30;
-	public static final int CAN_LIGHTNING_LEVEL = 45;
-	public static final int CAN_EXPLOSION_LEVEL = 60;
-	
-	public static final int MagicSkill_BingDan = 1;
-	public static final int MagicSkill_HuoDan = 1;
-	public static final int MagicSkill_XukongDan = 2;
-	public static final int MagicSkill_FengyinDan = 1;
-
-	public static final int MagicSkill_Levitation = 1;
-	public static final int MagicSkill_RemoveEffect = 2;
-	public static final int MagicSkill_TeleportUp = 2;
-	public static final int MagicSkill_TeleportDown = 2;
-	public static final int MagicSkill_ImmuneFallDamage = 2;
-	public static final int MagicSkill_ThousandsFrozen = 3;
-	public static final int MagicSkill_Firestorm = 3;
-	public static final int MagicSkill_RandomTeleport = 2;
-	public static final int MagicSkill_RandomTeleportFar = 5;
-	public static final int MagicSkill_GrowBlock = 1;
-	public static final int MagicSkill_GrowAreaBlock = 32;
-	
-	public static final int MagicSkill_SummonSnowman = 100;
-	public static final int MagicSkill_SummonTaoistPriest = 1000;
+//	protected static final int DAN_GROUP_LAUNCH_HEIGHT = 32;
+//	protected static final int DAN_GROUP_FREQUENCY_TICK = 5;
+//	
+//	public static final float EXPLOSION_PROBABILITY_K = 0.01F;
+//	public static final float EXPLOSION_STRENGTH_K = 0.05F;
+//	public static final float SLOWNESS_PROBABILITY_K = 0.02F;
+//	public static final float SLOWNESS_STRENGTH_K = 0.1F;
+//	public static final float ThousandsFrozen_Range_K = 0.25F;
+//	public static final float Firestorm_Range_K = 0.25F;
+//	
+//	public static final int CAN_SHOOT_HUODAN_LEVEL = 15;
+//	public static final int IMMUNE_FIRE_LEVEL = 30;
+//	public static final int CAN_LIGHTNING_LEVEL = 45;
+//	public static final int CAN_EXPLOSION_LEVEL = 60;
+//	
+//	public static final int MagicSkill_BingDan = 1;
+//	public static final int MagicSkill_HuoDan = 1;
+//	public static final int MagicSkill_XukongDan = 2;
+//	public static final int MagicSkill_FengyinDan = 1;
+//
+//	public static final int MagicSkill_Levitation = 1;
+//	public static final int MagicSkill_RemoveEffect = 2;
+//	public static final int MagicSkill_TeleportUp = 2;
+//	public static final int MagicSkill_TeleportDown = 2;
+//	public static final int MagicSkill_ImmuneFallDamage = 2;
+//	public static final int MagicSkill_ThousandsFrozen = 3;
+//	public static final int MagicSkill_Firestorm = 3;
+//	public static final int MagicSkill_RandomTeleport = 2;
+//	public static final int MagicSkill_RandomTeleportFar = 5;
+//	public static final int MagicSkill_GrowBlock = 1;
+//	public static final int MagicSkill_GrowAreaBlock = 32;
+//	
+//	public static final int MagicSkill_SummonSnowman = 100;
+//	public static final int MagicSkill_SummonTaoistPriest = 1000;
 
 	
 //	protected static EntityArrowBingDan shootBingDan(EntityLivingBase thrower, EntityLivingBase target, float attackDamage, float slownessProbability, int slownessStrength, boolean checkFaction) {
@@ -262,12 +265,28 @@ public class SkillEntity extends SkillBase{
 //		}
 //    }
 	
-//	protected static int chainDrop(ItemStack toolStack, World world, IBlockState blockState, BlockPos pos, int maxAmount) {
-//		if(canChainDrop(toolStack, blockState)) {
-//			return chainDropBlockBase(world, blockState, pos, 0, maxAmount);
-//		}
-//		return 0;
-//	}
+	protected static int chainDropBlock(ItemStack toolStack, World world, int x, int y, int z, int maxAmount) {
+		Block block = world.getBlock(x, y, z);
+		int meta = world.getBlockMetadata(x, y, z);
+		BlockPos pos = new BlockPos(x, y, z, world, block, meta);
+		
+		if(canChainDrop(toolStack, pos)) {
+			return chainDropBlockBase(world, pos, 0, maxAmount);
+		}
+		return 0;
+	}
+	
+	protected static int chainDropPlantBlock(ItemStack toolStack, World world, int x, int y, int z, int maxAmount) {
+		Block block = world.getBlock(x, y, z);
+		int meta = world.getBlockMetadata(x, y, z);
+		BlockPos pos = new BlockPos(x, y, z, world, block, meta);
+		
+		if(!(block instanceof IPlantable)) return 0;
+		if(canChainDrop(toolStack, pos)) {
+			return chainDropBlockBySameYBase(world, pos, 0, maxAmount);
+		}
+		return 0;
+	}
 	//TODO------Skill Util--------------------
 //    private static BlockPos getLaunchBlock(World world, BlockPos targetPos) {
 //		int x = targetPos.getX();
@@ -295,25 +314,27 @@ public class SkillEntity extends SkillBase{
 //		return throwerPos;
 //    }
     
-//    private static boolean canChainDrop(ItemStack toolStack, IBlockState blockState) {
-//    	if(null == toolStack || null == toolStack.getItem() || null == blockState) {
-//    		return false;
-//    	}
-//		if(toolStack.getItem().getDestroySpeed(toolStack, blockState) > 1.0F) {
-//			return true;
-//		}
-//		
-//    	if(toolStack.getItem() instanceof ItemSword) {
-//    		
-//		}else if(toolStack.getItem() instanceof ItemAxe) {
-//			
-//		}else if(toolStack.getItem() instanceof ItemPickaxe) {
-//			
-//		}else if(toolStack.getItem() instanceof ItemSpade) {
-//			
-//		}else if(toolStack.getItem() instanceof ItemHoe) {
-//			
-//		}
-//    	return false;
-//    }
+    private static boolean canChainDrop(ItemStack toolStack, BlockPos pos) {
+    	if(null == toolStack || null == toolStack.getItem() || null == pos) {
+    		return false;
+    	}
+		if(toolStack.getItem().getDigSpeed(toolStack, pos.getBlock(), toolStack.getItemDamage()) > 1.0F) {
+			return true;
+		}
+		
+    	if(toolStack.getItem() instanceof ItemSword) {
+    		
+		}else if(toolStack.getItem() instanceof ItemAxe) {
+			
+		}else if(toolStack.getItem() instanceof ItemPickaxe) {
+			
+		}else if(toolStack.getItem() instanceof ItemSpade) {
+			
+		}else if(toolStack.getItem() instanceof ItemHoe) {
+			
+		}else if(toolStack.getItem() instanceof ItemBaseTool) {
+			
+		}
+    	return false;
+    }
 }

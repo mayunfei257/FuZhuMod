@@ -2,28 +2,41 @@ package com.shepherd.fuzhumod.item;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.google.common.collect.Sets;
+import com.shepherd.fuzhumod.BaseControl;
+import com.shepherd.fuzhumod.FuZhuMod;
 import com.shepherd.fuzhumod.base.Config;
+import com.shepherd.fuzhumod.util.SkillEntityPlayer;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 
-public class ItemToolHunDunSickle extends ItemBaseTool{
+public class ItemToolShougeSickle extends ItemTool{
+	private static final Set<Block> blockSet = Sets.newHashSet(new Block[] {Blocks.web, Blocks.pumpkin, Blocks.melon_block});
 	
-	public ItemToolHunDunSickle() {
-		super(0, ToolMaterialS.HUNDUN, new HashSet(), ToolType.Sickle);
-		setUnlocalizedName("itemToolHunDunSickle");
-		setTextureName(Config.MODID + ":itemtoolhundunsickle");
+	public ItemToolShougeSickle() {
+		super(0, FuZhuMod.config.getHunDunToolMaterial(), blockSet);
+		this.setUnlocalizedName("itemToolShougeSickle");
+		this.setTextureName(Config.MODID + ":itemtoolshougesickle");
+		this.setHarvestLevel("pickaxe", FuZhuMod.config.getHunDunToolMaterial().getHarvestLevel());
+		this.setHarvestLevel("axe", FuZhuMod.config.getHunDunToolMaterial().getHarvestLevel());
+		this.setHarvestLevel("shovel", FuZhuMod.config.getHunDunToolMaterial().getHarvestLevel());
+        this.setCreativeTab(BaseControl.fuZhuTab);
 	}
-	
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player){
@@ -50,31 +63,50 @@ public class ItemToolHunDunSickle extends ItemBaseTool{
 		}
 		return true;
 	}
+
+	@Override
+    public boolean hitEntity(ItemStack itemStack, EntityLivingBase entityLivingBase, EntityLivingBase player){
+        itemStack.damageItem(1, player);
+        return true;
+    }
 	
 	@Override
 	public boolean onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entity){
         if (!world.isRemote){
-			if(entity.isSneaking() && block instanceof IPlantable) {
-				for(; y >= 0;) {//find the first root block
-					Block thisBlock = world.getBlock(x, y, z);
-					Block thisBlockDown = world.getBlock(x, y - 1, z);
-					if((thisBlock == Blocks.air || thisBlock == block) && (thisBlockDown != block && thisBlockDown != Blocks.air)) {
-						dropBlock(world, block, x, y, z);
-						break;
-					}
-					y--;
-				}
+			if(entity.isSneaking() && block instanceof IPlantable && entity instanceof EntityPlayer) {
+				SkillEntityPlayer.chainDropPlantBlockSkill(itemStack, world, x, y, z, (EntityPlayer)entity);
+//				for(; y >= 0;) {//find the first root block
+//					Block thisBlock = world.getBlock(x, y, z);
+//					Block thisBlockDown = world.getBlock(x, y - 1, z);
+//					if((thisBlock == Blocks.air || thisBlock == block) && (thisBlockDown != block && thisBlockDown != Blocks.air)) {
+//						dropBlock(world, block, x, y, z);
+//						break;
+//					}
+//					y--;
+//				}
+		    	return true;
+			}else {
+				return super.onBlockDestroyed(itemStack, world, block, x, y, z, entity);
 			}
         }
-    	return true;
+    	return false;
+    }
+
+	@Override
+    public boolean func_150897_b(Block block){
+        return true;
+    }
+
+	@Override
+    public float func_150893_a(ItemStack itemStack, Block block){
+		return block instanceof IPlantable ? this.efficiencyOnProperMaterial : 1.0F;
     }
     
 	@Override
     @SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean showAdvancedInfo) {
-		super.addInformation(itemStack, entityPlayer, list, showAdvancedInfo);
-		list.add(I18n.format(Config.MODID + ".itemToolHunDunSickle.message1", new Object[]{}));
-		list.add(I18n.format(Config.MODID + ".itemToolHunDunSickle.message2", new Object[]{}));
+		list.add(I18n.format(Config.MODID + ".itemToolShougeSickle.message1", new Object[]{}));
+		list.add(I18n.format(Config.MODID + ".itemToolShougeSickle.message2", new Object[]{}));
 	}
 	
 	// private ---------------------------------------------------------------------------------------------------------------------------------------------------

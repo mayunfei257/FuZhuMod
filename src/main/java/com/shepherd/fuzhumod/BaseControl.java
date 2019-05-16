@@ -19,9 +19,9 @@ import com.shepherd.fuzhumod.item.ItemBlockBaseSlab;
 import com.shepherd.fuzhumod.item.ItemFuZhiCrystal;
 import com.shepherd.fuzhumod.item.ItemHuiMieCrystal;
 import com.shepherd.fuzhumod.item.ItemHunDunCrystal;
-import com.shepherd.fuzhumod.item.ItemToolHunDunEye;
 import com.shepherd.fuzhumod.item.ItemShengMingCrystal;
-import com.shepherd.fuzhumod.item.ItemToolHunDunSickle;
+import com.shepherd.fuzhumod.item.ItemToolHunDunEye;
+import com.shepherd.fuzhumod.item.ItemToolShougeSickle;
 import com.shepherd.fuzhumod.message.ClientToServerMessage;
 import com.shepherd.fuzhumod.world.WorldProviderMod;
 
@@ -36,7 +36,9 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,6 +52,7 @@ public class BaseControl {
 	//Dimension
 	public static int dimensionID;
 	//Block
+	public static Block blockHunDunPyknoticCrystal;
 	public static Block blockHunDunCrystal;
 	public static Block blockHunDunTable;
 	public static Block blockHunDunCao;
@@ -63,8 +66,8 @@ public class BaseControl {
 	public static Item itemHuiMieCrystal;
 	public static Item itemShengMingCrystal;
 	public static Item itemFuZhiCrystal;
-	public static Item itemToolHunDunEye;
-	public static Item itemToolHunDunSickle;
+	public static ItemTool itemToolHunDunEye;
+	public static ItemTool itemToolShougeSickle;
 	//FakePlayer
 	
 	//ServerSide
@@ -72,6 +75,7 @@ public class BaseControl {
 		//Dimension
 		dimensionID = FuZhuMod.config.getHunDun_Dimension_ID();
 		//Block
+		blockHunDunPyknoticCrystal = new BlockHunDunCrystal().setHardness(100f).setResistance(10000.0f).setLightLevel(1.0f).setBlockName("blockHunDunPyknoticCrystal").setBlockTextureName(Config.MODID + ":blockhundunpyknoticcrystal");
 		blockHunDunCrystal = new BlockHunDunCrystal();
 		blockHunDunTable = new BlockHunDunTable();
 		blockHunDunCao = new BlockHunDunCao();
@@ -86,7 +90,7 @@ public class BaseControl {
 		itemShengMingCrystal = new ItemShengMingCrystal();
 		itemFuZhiCrystal = new ItemFuZhiCrystal();
 		itemToolHunDunEye = new ItemToolHunDunEye();
-		itemToolHunDunSickle = new ItemToolHunDunSickle();
+		itemToolShougeSickle = new ItemToolShougeSickle();
 	}
 	
 	//ServerSide
@@ -95,6 +99,7 @@ public class BaseControl {
 		DimensionManager.registerProviderType(dimensionID, WorldProviderMod.class, false);
 		DimensionManager.registerDimension(dimensionID, dimensionID);
 		//Block
+		GameRegistry.registerBlock(blockHunDunPyknoticCrystal, ItemBlockBase.class, blockHunDunPyknoticCrystal.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunCrystal, ItemBlockBase.class, blockHunDunCrystal.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunTable, ItemBlockBase.class, blockHunDunTable.getUnlocalizedName());
 		GameRegistry.registerBlock(blockHunDunCao, ItemBlockBase.class, blockHunDunCao.getUnlocalizedName());
@@ -109,7 +114,7 @@ public class BaseControl {
 		GameRegistry.registerItem(itemShengMingCrystal, itemShengMingCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemFuZhiCrystal, itemFuZhiCrystal.getUnlocalizedName());
 		GameRegistry.registerItem(itemToolHunDunEye, itemToolHunDunEye.getUnlocalizedName());
-		GameRegistry.registerItem(itemToolHunDunSickle, itemToolHunDunSickle.getUnlocalizedName());
+		GameRegistry.registerItem(itemToolShougeSickle, itemToolShougeSickle.getUnlocalizedName());
 		//Entity
 //		EntityRegistry.registerModEntity(new ResourceLocation(Config.MODID + ":entitysupersnowman"), EntitySuperSnowman.class, "entitySuperSnowman", 263, ZijingMod.instance,64, 1, true, (204 << 16) + (0 << 8) + 204, (255 << 16) + (102 << 8) + 255);
 		//Message
@@ -117,6 +122,11 @@ public class BaseControl {
 //    	netWorkWrapper.registerMessage(ShepherdToClientMessage.Handler.class, ShepherdToClientMessage.class, nextID++, Side.CLIENT);
 		//Event
 		MinecraftForge.EVENT_BUS.register(new FuZhuEvent());
+		//Other
+		Item.ToolMaterial hunDunToolMaterial = FuZhuMod.config.getHunDunToolMaterial();
+		if(null != hunDunToolMaterial && hunDunToolMaterial.getRepairItemStack() == null) hunDunToolMaterial.setRepairItem(new ItemStack(itemHunDunCrystal, 1));
+		ItemArmor.ArmorMaterial hunDunArmorMaterial = FuZhuMod.config.getHunDunArmorMaterial();
+		if(null != hunDunArmorMaterial && hunDunArmorMaterial.customCraftingMaterial == null) hunDunArmorMaterial.customCraftingMaterial = itemHunDunCrystal;
 	}
     
 	//ClientSide
@@ -130,7 +140,8 @@ public class BaseControl {
 		//Recipe and Smelting
 		GameRegistry.addShapelessRecipe(new ItemStack(itemHunDunCrystal, 9), blockHunDunCrystal);
 		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunCrystal, 1), "AAA", "AAA", "AAA", 'A', itemHunDunCrystal);
-		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunTable, 1), "AAA", "BCB", "BDB", 'A', itemHunDunCrystal, 'B', Blocks.obsidian, 'C', Blocks.crafting_table, 'D',  blockHunDunCrystal);
+		GameRegistry.addShapelessRecipe(new ItemStack(blockHunDunCrystal, 9), blockHunDunPyknoticCrystal);
+		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunPyknoticCrystal, 1), "AAA", "AAA", "AAA", 'A', blockHunDunCrystal);
 		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunTable, 1), "AAA", "BCB", "BDB", 'A', itemHunDunCrystal, 'B', Blocks.obsidian, 'C', Blocks.crafting_table, 'D',  blockHunDunCrystal);
 		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunStone, 1, 1), "A", "A", 'A', new ItemStack(blockHunDunStoneSlab, 1));
 		GameRegistry.addShapedRecipe(new ItemStack(blockHunDunStone, 4, 2), "AA", "AA", 'A', new ItemStack(blockHunDunStone, 1, 0));
